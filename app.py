@@ -1,270 +1,203 @@
-from flask import Flask, request, jsonify, send_from_directory
-import pytesseract
-from PIL import Image
-import pandas as pd
 import os
-import cv2
-import numpy as np
+import pandas as pd
+from flask import Flask, request, jsonify, render_template, session
 from werkzeug.utils import secure_filename
-import time
-import threading
-from playsound import playsound
-from dotenv import load_dotenv
 import logging
-import traceback
+from datetime import datetime
+import json
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('app.log')
+    ]
+)
 logger = logging.getLogger(__name__)
 
-# Load environment variables
-load_dotenv()
-
-app = Flask(__name__, static_folder='static')
-
-# Configure upload folders
-UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'uploads')
-EXCEL_FOLDER = os.getenv('EXCEL_FOLDER', 'excel_files')
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'xlsx', 'xls'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['EXCEL_FOLDER'] = EXCEL_FOLDER
+app = Flask(__name__)
+app.secret_key = 'n8x#mP9$vL2@qR5&jK7*wY3'  # Unique secret key for session management
+app.config['EXCEL_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
-# Create necessary folders
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(EXCEL_FOLDER, exist_ok=True)
+# Create uploads folder if it doesn't exist
+os.makedirs(app.config['EXCEL_FOLDER'], exist_ok=True)
 
-# Global variable to store the Excel data
+# Load Excel data
 excel_data = None
-excel_lock = threading.Lock()
+excel_file_path = None
 
-# Configure Tesseract path for different environments
-if os.getenv('TESSERACT_PATH'):
-    pytesseract.pytesseract.tesseract_cmd = os.getenv('TESSERACT_PATH')
-else:
-    # Try to find tesseract in common locations
-    common_paths = [
-        '/usr/bin/tesseract',
-        '/usr/local/bin/tesseract',
-        'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-    ]
-    for path in common_paths:
-        if os.path.exists(path):
-            pytesseract.pytesseract.tesseract_cmd = path
-            logger.info(f"Found Tesseract at: {path}")
-            break
-    else:
-        logger.warning("Tesseract not found in common locations")
+ALLOWED_EXTENSIONS = {'xlsx', 'xls'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def preprocess_image(img):
-    # Convert to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+def validate_number(number):
+    """Validate if the extracted number is a valid 5-digit number."""
+    if not number:
+        return False
     
-    # Apply Gaussian blur to reduce noise
-    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    # Remove any non-digit characters
+    number = ''.join(filter(str.isdigit, number))
     
-    # Apply adaptive thresholding
-    thresh = cv2.adaptiveThreshold(
-        blurred,
-        255,
-        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY_INV,
-        11,
-        2
-    )
+    # Check if it's a 5-digit number
+    if len(number) != 5:
+        return False
     
-    # Perform morphological operations to clean up the image
-    kernel = np.ones((3,3), np.uint8)
-    cleaned = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
-    
-    return cleaned
+    return number
 
-def find_number_region(img):
-    # Convert to grayscale if not already
-    if len(img.shape) == 3:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    else:
-        gray = img
-    
-    # Apply thresholding
-    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-    
-    # Find contours
-    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
-    if not contours:
-        return None
-    
-    # Find the largest contour (assuming it's the number)
-    largest_contour = max(contours, key=cv2.contourArea)
-    x, y, w, h = cv2.boundingRect(largest_contour)
-    
-    # Add some padding
-    padding = 10
-    x = max(0, x - padding)
-    y = max(0, y - padding)
-    w = min(img.shape[1] - x, w + 2*padding)
-    h = min(img.shape[0] - y, h + 2*padding)
-    
-    return (x, y, w, h)
+# Initialize search history
+def init_search_history():
+    if 'search_history' not in session:
+        session['search_history'] = []
 
-def process_image(image_path):
-    # Read the image
-    img = cv2.imread(image_path)
-    if img is None:
-        raise ValueError("Could not read image")
+def save_search_history(number, status, timestamp=None):
+    if timestamp is None:
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     
-    # Find the region containing the number
-    region = find_number_region(img)
-    if region:
-        x, y, w, h = region
-        # Crop the image to the number region
-        img = img[y:y+h, x:x+w]
-    
-    # Preprocess the image
-    processed = preprocess_image(img)
-    
-    # Try different OCR configurations
-    configs = [
-        '--psm 7 -c tessedit_char_whitelist=0123456789',  # Single line
-        '--psm 8 -c tessedit_char_whitelist=0123456789',  # Single word
-        '--psm 13 -c tessedit_char_whitelist=0123456789'  # Raw line
-    ]
-    
-    best_result = None
-    highest_confidence = 0
-    
-    for config in configs:
-        # Get OCR result with confidence
-        data = pytesseract.image_to_data(processed, config=config, output_type=pytesseract.Output.DICT)
-        
-        # Find the result with highest confidence
-        for i in range(len(data['text'])):
-            if float(data['conf'][i]) > highest_confidence and data['text'][i].strip():
-                highest_confidence = float(data['conf'][i])
-                best_result = data['text'][i].strip()
-    
-    if not best_result:
-        # If no result found, try one more time with different preprocessing
-        processed = cv2.bitwise_not(processed)  # Invert the image
-        best_result = pytesseract.image_to_string(processed, config=configs[0]).strip()
-    
-    return best_result if best_result else ""
-
-def check_excel(number):
-    global excel_data
-    
-    if excel_data is None:
-        return {
-            'found': False,
-            'message': 'Please upload an Excel file first'
-        }
-    
-    try:
-        start_time = time.time()
-        with excel_lock:
-            # Check if number exists in any column
-            found = number in excel_data.values
-        
-        processing_time = time.time() - start_time
-        
-        if found:
-            # Play sound notification
-            threading.Thread(target=playsound, args=('static/notification.mp3',)).start()
-            
-        return {
-            'found': bool(found),
-            'message': f'Number found successfully! (Search time: {processing_time:.2f}s)' if found else f'Number not found. (Search time: {processing_time:.2f}s)'
-        }
-    except Exception as e:
-        return {
-            'found': False,
-            'message': f'Error checking Excel: {str(e)}'
-        }
-
-def load_excel_file(filepath):
-    global excel_data
-    try:
-        # Read Excel file with optimized settings
-        df = pd.read_excel(
-            filepath,
-            engine='openpyxl',
-            dtype=str,  # Read all columns as strings for faster comparison
-            na_filter=False  # Disable NA filtering for better performance
-        )
-        
-        with excel_lock:
-            excel_data = df
-            
-        return True, "Excel file loaded successfully"
-    except Exception as e:
-        return False, f"Error loading Excel file: {str(e)}"
+    history = session.get('search_history', [])
+    history.append({
+        'number': number,
+        'status': status,
+        'timestamp': timestamp
+    })
+    session['search_history'] = history[-50:]  # Keep last 50 searches
 
 @app.route('/')
 def index():
-    return send_from_directory('static', 'index.html')
+    init_search_history()
+    return render_template('index.html')
 
 @app.route('/upload-excel', methods=['POST'])
 def upload_excel():
     if 'file' not in request.files:
-        return jsonify({'error': 'No file provided'}), 400
+        return jsonify({'error': 'No file uploaded'})
     
     file = request.files['file']
     if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+        return jsonify({'error': 'No file selected'})
     
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['EXCEL_FOLDER'], filename)
-        file.save(filepath)
+    if not file.filename.endswith(('.xlsx', '.xls')):
+        return jsonify({'error': 'Please upload an Excel file (.xlsx or .xls)'})
+    
+    try:
+        # Save the file
+        file_path = os.path.join(app.config['EXCEL_FOLDER'], 'numbers.xlsx')
+        file.save(file_path)
         
-        success, message = load_excel_file(filepath)
-        return jsonify({'success': success, 'message': message})
-    
-    return jsonify({'error': 'Invalid file type'}), 400
+        # Read the Excel file
+        df = pd.read_excel(file_path, dtype=str, na_filter=False)
+        
+        # Store the data in session
+        session['excel_data'] = df.to_dict('records')
+        
+        # Get some basic statistics
+        total_rows = len(df)
+        total_columns = len(df.columns)
+        column_names = df.columns.tolist()
+        
+        return jsonify({
+            'message': 'Excel file uploaded successfully',
+            'stats': {
+                'total_rows': total_rows,
+                'total_columns': total_columns,
+                'column_names': column_names
+            }
+        })
+    except Exception as e:
+        logger.error(f"Error processing Excel file: {str(e)}")
+        return jsonify({'error': f'Error processing Excel file: {str(e)}'})
 
 @app.route('/check-number', methods=['POST'])
 def check_number():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image provided'}), 400
+    data = request.get_json()
+    number = data.get('number', '').strip()
     
-    file = request.files['image']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+    if not number:
+        return jsonify({'error': 'No number provided'})
     
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
+    if not number.isdigit():
+        return jsonify({'error': 'Please speak a valid number'})
+    
+    if 'excel_data' not in session:
+        return jsonify({'error': 'Please upload an Excel file first'})
+    
+    try:
+        excel_data = session['excel_data']
+        found = False
+        found_row = None
+        found_column = None
         
-        try:
-            # Process the image and extract number
-            number = process_image(filepath)
-            logger.info(f"Extracted number: {number}")
+        # Check each column in the Excel data
+        for row_idx, row in enumerate(excel_data):
+            for col_name, value in row.items():
+                if str(value).strip() == number:
+                    found = True
+                    found_row = row_idx
+                    found_column = col_name
+                    break
+            if found:
+                break
+        
+        # Save to search history
+        save_search_history(number, 'found' if found else 'not_found')
+        
+        if found:
+            # Get the row with the found number and up to 3 columns before and after
+            columns = list(excel_data[0].keys())
+            col_idx = columns.index(found_column)
+            start_col = max(0, col_idx - 1)
+            end_col = min(len(columns), col_idx + 2)
+            relevant_columns = columns[start_col:end_col]
             
-            if not number:
-                return jsonify({
-                    'error': 'Could not detect any number in the image. Please try again with a clearer image.'
-                }), 400
+            # Create a preview with just the relevant data
+            preview_data = {
+                'headers': relevant_columns,
+                'row': {col: excel_data[found_row][col] for col in relevant_columns},
+                'row_index': found_row + 2  # Add 2 to match Excel's 1-based indexing
+            }
             
-            # Check the number in Excel
-            result = check_excel(number)
+            return jsonify({
+                'status': 'found',
+                'number': number,
+                'preview': preview_data
+            })
+        else:
+            return jsonify({
+                'status': 'not_found',
+                'number': number
+            })
             
-            # Clean up the uploaded file
-            os.remove(filepath)
-            
-            return jsonify(result)
-        except Exception as e:
-            logger.error(f"Error processing image: {str(e)}")
-            logger.error(traceback.format_exc())
-            return jsonify({'error': f'Error processing image: {str(e)}'}), 500
+    except Exception as e:
+        logger.error(f"Error checking number: {str(e)}")
+        return jsonify({'error': f'Error checking number: {str(e)}'})
+
+@app.route('/get-history', methods=['GET'])
+def get_history():
+    init_search_history()
+    history = session.get('search_history', [])
     
-    return jsonify({'error': 'Invalid file type'}), 400
+    # Calculate statistics
+    total_searches = len(history)
+    found_count = sum(1 for item in history if item['status'] == 'found')
+    not_found_count = total_searches - found_count
+    
+    return jsonify({
+        'history': history,
+        'stats': {
+            'total_searches': total_searches,
+            'found_count': found_count,
+            'not_found_count': not_found_count,
+            'success_rate': (found_count / total_searches * 100) if total_searches > 0 else 0
+        }
+    })
+
+@app.route('/clear-history', methods=['POST'])
+def clear_history():
+    session['search_history'] = []
+    return jsonify({'message': 'Search history cleared'})
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
-    debug = os.getenv('FLASK_ENV') == 'development'
-    app.run(host='0.0.0.0', port=port, debug=debug) 
+    app.run(debug=True, host='0.0.0.0', port=5000) 

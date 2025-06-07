@@ -40,4 +40,11 @@ excel_files/
 *.mp3
 
 # Logs
-*.log 
+*.log
+
+# Local development
+.env.local
+
+# Uploads
+uploads/*
+!uploads/.gitkeep 
