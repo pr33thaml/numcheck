@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            align-items: start;
+            padding: 0 10px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            background: linear-gradient(45deg, #8B5CF6, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            animation: shimmer 2s infinite;
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .card {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+            animation: liquidFloat 1.5s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateZ(10px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        @keyframes liquidFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(2%, 2%) rotate(0.5deg); }
+            50% { transform: translate(-2%, -2%) rotate(-0.5deg); }
+            75% { transform: translate(-2%, 2%) rotate(0.5deg); }
+        }
+
+        .btn {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: rgba(139, 92, 246, 0.3);
+            transform: translateZ(10px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .btn-danger {
+            background: rgba(236, 72, 153, 0.2);
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(236, 72, 153, 0.3);
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.2);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            max-width: 400px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+
+        .recording-indicator {
+            display: none;
+            margin: 1rem 0;
+            color: #EC4899;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .recording-indicator.active {
+            display: block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .detected-number {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            display: none;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            display: none;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .status.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .status.not-found {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+            width: 100%;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(139, 92, 246, 0.1);
+            border-top: 4px solid #8B5CF6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .preview-table th, .preview-table td {
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .preview-table th {
+            background: rgba(139, 92, 246, 0.2);
+            font-weight: 500;
+        }
+
+        .preview-table td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .preview-table td.highlight {
+            background: rgba(16, 185, 129, 0.2);
+            font-weight: 500;
+        }
+
+        .preview-container {
+            margin-top: 1rem;
+            display: none;
+            width: 100%;
+        }
+
+        .preview-container h3 {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+        }
+
+        .preview-info {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(139, 92, 246, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .history-list {
+            max-height: 400px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .history-list table {
+            width: 100%;
+        }
+
+        .history-list th {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 46, 0.9);
+            z-index: 1;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .history-header h2 {
+            margin: 0;
+            flex: 1;
+        }
+
+        #clearHistory {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            min-width: auto;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0 5px;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .history-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+
+            #clearHistory {
+                align-self: flex-end;
+            }
+
+            .btn {
+                min-width: 120px;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media (min-width: 1201px) {
+            .container {
+                width: 85%;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .status-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+            transform: translateX(120%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .status-container.show {
+            transform: translateX(0);
+        }
+
+        .status {
+            margin-top: 0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: none;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .status.success {
+            background: rgba(16, 185, 129, 0.95);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: white;
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.95);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: white;
+        }
+
+        .status.not-found {
+            background: rgba(245, 158, 11, 0.95);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            color: white;
+        }
+
+        .status-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-message {
+            margin-bottom: 0.5rem;
+        }
+
+        .status-details {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .close-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .close-status:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Number Checker</h1>
+            <p>Upload your Excel file and speak the number</p>
+        </div>
+
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Step 1: Upload Excel File</h2>
+            <form id="uploadForm" class="upload-form">
+                <div class="mb-3">
+                    <label for="excelFile" class="block mb-2">Select Excel File</label>
+                    <input type="file" class="form-control" id="excelFile" accept=".xlsx,.xls" required>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-upload"></i>
+                    Upload Excel
+                </button>
+            </form>
+            <div id="fileStats" class="mt-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg" style="display: none;">
+                <h3 class="text-lg font-semibold mb-2">File Statistics</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-300">Total Rows:</p>
+                        <p class="text-lg font-semibold" id="totalRows">-</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-300">Total Columns:</p>
+                        <p class="text-lg font-semibold" id="totalColumns">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Step 2: Speak the Number</h2>
+            <p class="mb-4">Click the button below and speak the number</p>
+            <div class="recording-indicator" id="recordingIndicator">
+                <i class="fas fa-microphone"></i> Recording...
+            </div>
+            <div class="detected-number" id="detectedNumber"></div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Checking number...</p>
+            </div>
+            <div class="flex justify-center gap-4">
+                <button id="startRecording" class="btn" disabled>
+                    <i class="fas fa-microphone"></i> Start Recording
+                </button>
+                <button id="stopRecording" class="btn btn-danger" style="display: none;">
+                    <i class="fas fa-stop"></i> Stop Recording
+                </button>
+                <button id="checkNumber" class="btn" style="display: none;">
+                    <i class="fas fa-search"></i> Check Number
+                </button>
+            </div>
+        </div>
+
+        <div id="statusContainer" class="status-container">
+            <div id="status" class="status">
+                <button class="close-status" onclick="hideStatus()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="status-icon"></div>
+                <div class="status-message"></div>
+                <div class="status-details"></div>
+            </div>
+        </div>
+        
+        <div id="matchesContainer" class="matches-container" style="display: none;">
+            <h3 class="text-lg font-semibold mb-3">Found Matches</h3>
+            <div id="matchesList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div class="card">
+            <div class="history-header">
+                <h2 class="text-xl font-semibold">Search History</h2>
+                <button id="clearHistory" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Clear History
+                </button>
+            </div>
+            <div id="searchStats" class="mb-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-300">Total Searches:</p>
+                        <p class="text-lg font-semibold" id="totalSearches">0</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-300">Success Rate:</p>
+                        <p class="text-lg font-semibold" id="successRate">0%</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-300">Found:</p>
+                        <p class="text-lg font-semibold" id="foundCount">0</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-300">Not Found:</p>
+                        <p class="text-lg font-semibold" id="notFoundCount">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="history-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-left p-2">Number</th>
+                            <th class="text-left p-2">Status</th>
+                            <th class="text-left p-2">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let recognition;
+        let isRecording = false;
+        let currentNumber = '';
+        let isContinuousMode = true;
+
+        // Initialize Web Speech API
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onresult = function(event) {
+                let interimTranscript = '';
+                let finalTranscript = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        // Normalize the input by removing spaces and dashes
+                        currentNumber = transcript.trim().replace(/\s+/g, '').replace(/-/g, '');
+                        finalTranscript = currentNumber;
+                    } else {
+                        interimTranscript = transcript;
+                    }
+                }
+
+                // Update the display with the detected input
+                const numberDisplay = document.getElementById('detectedNumber');
+                if (finalTranscript) {
+                    numberDisplay.textContent = `Detected Input: ${finalTranscript}`;
+                    numberDisplay.style.display = 'block';
+                    document.getElementById('checkNumber').style.display = 'inline-block';
+                }
+            };
+
+            recognition.onerror = function(event) {
+                showStatus('Error: ' + event.error, 'error');
+                stopRecording();
+            };
+
+            recognition.onend = function() {
+                if (isRecording) {
+                    recognition.start();
+                }
+            };
+        } else {
+            showStatus('Speech recognition is not supported in your browser. Please use Chrome.', 'error');
+        }
+
+        // Initialize audio elements
+        const successSound = new Audio('/static/correct.mp3');
+        const errorSound = new Audio('/static/incorrect.mp3');
+        const notFoundSound = new Audio('/static/incorrect.mp3');
+        const uploadSound = new Audio('/static/done.mp3');
+
+        // Preload sounds
+        function preloadSounds() {
+            successSound.load();
+            errorSound.load();
+            notFoundSound.load();
+            uploadSound.load();
+        }
+
+        // Call preload when page loads
+        window.addEventListener('load', preloadSounds);
+
+        function playSound(type) {
+            try {
+                // Stop any currently playing sound
+                successSound.pause();
+                successSound.currentTime = 0;
+                errorSound.pause();
+                errorSound.currentTime = 0;
+                notFoundSound.pause();
+                notFoundSound.currentTime = 0;
+                uploadSound.pause();
+                uploadSound.currentTime = 0;
+
+                // Play the appropriate sound
+                switch(type) {
+                    case 'success':
+                        successSound.play().catch(e => console.log('Error playing success sound:', e));
+                        break;
+                    case 'error':
+                        errorSound.play().catch(e => console.log('Error playing error sound:', e));
+                        break;
+                    case 'not-found':
+                        notFoundSound.play().catch(e => console.log('Error playing not found sound:', e));
+                        break;
+                    case 'upload':
+                        uploadSound.play().catch(e => console.log('Error playing upload sound:', e));
+                        break;
+                }
+            } catch (error) {
+                console.log('Error playing sound:', error);
+            }
+        }
+
+        // Excel Upload
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('excelFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showStatus('Please select an Excel file', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            showLoading();
+            fetch('/upload-excel', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.error) {
+                    showStatus(data.error, 'error');
+                } else {
+                    showStatus('Excel file uploaded successfully!', 'success');
+                    document.getElementById('startRecording').disabled = false;
+                    
+                    // Show file statistics
+                    const stats = data.stats;
+                    document.getElementById('totalRows').textContent = stats.total_rows;
+                    document.getElementById('totalColumns').textContent = stats.total_columns;
+                    document.getElementById('fileStats').style.display = 'block';
+                    playSound('upload');
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                showStatus('Error uploading Excel file: ' + error, 'error');
+            });
+        });
+
+        function showPreview(data) {
+            const container = document.getElementById('matchesContainer');
+            const matchesList = document.getElementById('matchesList');
+            
+            // Clear previous data
+            matchesList.innerHTML = '';
+            container.style.display = 'block';
+
+            if (data.matches && data.matches.length > 0) {
+                data.matches.forEach(match => {
+                    const matchCard = document.createElement('div');
+                    matchCard.className = 'p-4 bg-opacity-10 bg-blue-500 rounded-lg';
+                    
+                    const rowInfo = document.createElement('p');
+                    rowInfo.className = 'text-sm text-gray-300 mb-2';
+                    rowInfo.textContent = `Row: ${match.row_index}`;
+                    matchCard.appendChild(rowInfo);
+
+                    const table = document.createElement('table');
+                    table.className = 'min-w-full bg-opacity-5 bg-blue-400 rounded-lg overflow-hidden';
+                    
+                    const thead = document.createElement('thead');
+                    const headerRow = document.createElement('tr');
+                    match.headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.className = 'py-2 px-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider';
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+                    thead.appendChild(headerRow);
+                    table.appendChild(thead);
+
+                    const tbody = document.createElement('tbody');
+                    const dataRow = document.createElement('tr');
+                    match.headers.forEach(header => {
+                        const td = document.createElement('td');
+                        td.className = 'py-2 px-3 whitespace-nowrap text-sm text-white';
+                        td.textContent = match.row[header];
+                        dataRow.appendChild(td);
+                    });
+                    tbody.appendChild(dataRow);
+                    table.appendChild(tbody);
+
+                    matchCard.appendChild(table);
+                    matchesList.appendChild(matchCard);
+                });
+            }
+        }
+
+        function hidePreview() {
+            document.getElementById('matchesContainer').style.display = 'none';
+            document.getElementById('matchesList').innerHTML = ''; // Clear content
+        }
+
+        // Check Number Button
+        document.getElementById('checkNumber').addEventListener('click', function() {
+            if (currentNumber) {
+                checkNumber(currentNumber);
+            }
+        });
+
+        // Recording Controls
+        document.getElementById('startRecording').addEventListener('click', startRecording);
+        document.getElementById('stopRecording').addEventListener('click', stopRecording);
+
+        function startRecording() {
+            if (recognition) {
+                currentNumber = ''; // Reset the current number
+                recognition.start();
+                isRecording = true;
+                document.getElementById('recordingIndicator').classList.add('active');
+                document.getElementById('startRecording').style.display = 'none';
+                document.getElementById('stopRecording').style.display = 'inline-block';
+                document.getElementById('checkNumber').style.display = 'inline-block';
+                document.getElementById('detectedNumber').style.display = 'none';
+                document.getElementById('status').style.display = 'none';
+                document.getElementById('matchesContainer').style.display = 'none';
+            }
+        }
+
+        function stopRecording() {
+            if (recognition && isRecording) {
+                recognition.stop();
+                isRecording = false;
+                document.getElementById('recordingIndicator').classList.remove('active');
+                document.getElementById('startRecording').style.display = 'inline-block';
+                document.getElementById('stopRecording').style.display = 'none';
+                // Keep the check number button visible
+            }
+        }
+
+        function checkNumber(number) {
+            showLoading();
+            fetch('/check-number', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ number: number })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.error) {
+                    showStatus(data.error, 'error');
+                    hidePreview(); // Hide preview on error
+                } else if (data.status === 'found') {
+                    showStatus(`Number found! Total matches: ${data.matches.length}`, 'success', `Detected: ${data.number}`);
+                    showPreview(data); // Pass the whole data object
+                    playSound('success');
+                } else {
+                    showStatus(`Number '${data.number}' not found.`, 'not-found');
+                    hidePreview(); // Hide preview on not found
+                    playSound('not-found');
+                }
+                
+                // Update history after checking number
+                updateHistory();
+            })
+            .catch(error => {
+                hideLoading();
+                showStatus('Error checking number: ' + error, 'error');
+                hidePreview(); // Hide preview on error
+            });
+        }
+
+        function showStatus(message, type, details = '') {
+            const status = document.getElementById('status');
+            const statusContainer = document.getElementById('statusContainer');
+            const statusIcon = status.querySelector('.status-icon');
+            const statusMessage = status.querySelector('.status-message');
+            const statusDetails = status.querySelector('.status-details');
+
+            // Set icon based on type
+            statusIcon.innerHTML = type === 'success' ? 
+                '<i class="fas fa-check-circle"></i>' : 
+                type === 'error' ? 
+                '<i class="fas fa-times-circle"></i>' : 
+                '<i class="fas fa-exclamation-circle"></i>';
+
+            // Set message and details
+            statusMessage.textContent = message;
+            statusDetails.textContent = details;
+
+            // Update status class
+            status.className = 'status ' + type;
+            status.style.display = 'block';
+            statusContainer.classList.add('show');
+
+            // Play sound
+            playSound(type);
+
+            // Auto-hide after 5 seconds
+            setTimeout(hideStatus, 5000);
+        }
+
+        function hideStatus() {
+            const statusContainer = document.getElementById('statusContainer');
+            statusContainer.classList.remove('show');
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // History Management
+        function updateHistory() {
+            fetch('/get-history')
+                .then(response => response.json())
+                .then(data => {
+                    const historyList = document.getElementById('historyList');
+                    historyList.innerHTML = '';
+                    
+                    // Reverse the history array to show latest first
+                    data.history.slice().reverse().forEach(item => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-t border-gray-700';
+                        
+                        const statusClass = item.status === 'found' ? 'text-green-500' : 'text-yellow-500';
+                        const statusText = item.status === 'found' ? 'Found' : 'Not Found';
+                        
+                        row.innerHTML = `
+                            <td class="p-2">${item.number}</td>
+                            <td class="p-2 ${statusClass}">${statusText}</td>
+                            <td class="p-2 text-gray-400">${item.timestamp}</td>
+                        `;
+                        
+                        historyList.appendChild(row);
+                    });
+                    
+                    // Update statistics
+                    const stats = data.stats;
+                    document.getElementById('totalSearches').textContent = stats.total_searches;
+                    document.getElementById('successRate').textContent = `${stats.success_rate.toFixed(1)}%`;
+                    document.getElementById('foundCount').textContent = stats.found_count;
+                    document.getElementById('notFoundCount').textContent = stats.not_found_count;
+                });
+        }
+
+        // Clear History
+        document.getElementById('clearHistory').addEventListener('click', function() {
+            fetch('/clear-history', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateHistory();
+            });
+        });
+
+        // Initial history load
+        updateHistory();
+    </script>
+</body>
+</html> 

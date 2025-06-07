@@ -1,26 +1,9 @@
 services:
   - type: web
-    name: number-checker-app
+    name: numcheck
     env: python
-    runtime: python3.9
-    buildCommand: |
-      apt-get update && apt-get install -y \
-        tesseract-ocr \
-        build-essential \
-        python3-dev \
-        gcc \
-        g++ \
-        make \
-        cmake \
-        libatlas-base-dev \
-        libopenblas-dev
-      python -m pip install --upgrade pip setuptools wheel
-      pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
-      - key: FLASK_ENV
-        value: production
-      - key: TESSERACT_PATH
-        value: /usr/bin/tesseract
-      - key: OPENBLAS_NUM_THREADS
-        value: "1" 
+      - key: PYTHON_VERSION
+        value: 3.9.0 
