@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emotio 😌 - Chat</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .card {
+      background: rgba(26, 26, 46, 0.6);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+      animation: liquidFloat 1.5s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .card:hover {
+      transform: translateZ(10px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .card:hover::after {
+      animation: splash 0.5s ease-out forwards;
+    }
+
+    @keyframes liquidFloat {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(2%, 2%) rotate(0.5deg);
+      }
+      50% {
+        transform: translate(-2%, -2%) rotate(-0.5deg);
+      }
+      75% {
+        transform: translate(-2%, 2%) rotate(0.5deg);
+      }
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+        rgba(139, 92, 246, 0.1) 0%,
+        rgba(236, 72, 153, 0.1) 50%,
+        rgba(139, 92, 246, 0.1) 100%
+      );
+      background-size: 200% 200%;
+      animation: liquidGradient 1.5s ease infinite;
+      z-index: -1;
+      opacity: 0.5;
+      transform: scale(1);
+    }
+
+    @keyframes splash {
+      0% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes liquidGradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .card h2 {
+      background: linear-gradient(45deg, #8B5CF6, #EC4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateZ(15px);
+      text-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .header {
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .nav-link {
+      color: #fff;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      opacity: 1;
+      background: rgba(139, 92, 246, 0.2);
+      transform: translateZ(5px) scale(1.02);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .nav-link.active {
+      opacity: 1;
+      background: rgba(139, 92, 246, 0.3);
+      transform: translateZ(10px);
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+      border-color: rgba(139, 92, 246, 0.5);
+    }
+
+    .nav-link i {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+      transform: translateZ(5px);
+    }
+
+    .header h1 {
+      background: linear-gradient(45deg, #8B5CF6, #EC4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateZ(15px);
+      text-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .header h1 span {
+      font-size: 2rem;
+      animation: wave 2s infinite;
+      display: inline-block;
+      transform-origin: 70% 70%;
+      -webkit-text-fill-color: initial;
+      background: none;
+      text-shadow: none;
+    }
+
+    .logout-btn {
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      color: white;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+    }
+
+    .logout-btn:hover {
+      background: rgba(139, 92, 246, 0.3);
+      transform: translateZ(10px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+    }
+
+    .logout-btn i {
+      margin-right: 0.5rem;
+      transform: translateZ(5px);
+    }
+
+    .chat-container {
+      height: calc(100vh - 200px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #8b5cf6 rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      background: rgba(17, 17, 17, 0.3);
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .chat-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .chat-container::-webkit-scrollbar-thumb {
+      background-color: #8b5cf6;
+      border-radius: 3px;
+    }
+
+    .message {
+      max-width: 80%;
+      margin: 1rem 0;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      animation: fadeIn 0.3s ease;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-message {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+      color: #fff;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .bot-message {
+      background: rgba(45, 45, 45, 0.5);
+      margin-right: auto;
+      border-bottom-left-radius: 0;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .bot-message p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .bot-message ul, .bot-message ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .bot-message li {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .bot-message li::marker {
+      color: #8b5cf6;
+    }
+
+    .bot-message strong {
+      color: #8b5cf6;
+      font-weight: 600;
+    }
+
+    .bot-message em {
+      font-style: italic;
+      color: #a5b4fc;
+    }
+
+    .bot-message h3 {
+      color: #8b5cf6;
+      font-size: 1.2rem;
+      margin: 1.5rem 0 1rem;
+      font-weight: 600;
+    }
+
+    .bot-message blockquote {
+      border-left: 3px solid #8b5cf6;
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: #a5b4fc;
+      font-style: italic;
+    }
+
+    .bot-message code {
+      background: rgba(139, 92, 246, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-family: monospace;
+      color: #8b5cf6;
+    }
+
+    .bot-message pre {
+      background: rgba(17, 17, 17, 0.5);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    .bot-message pre code {
+      background: none;
+      padding: 0;
+      color: #e2e8f0;
+    }
+
+    .message::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      background: inherit;
+      border: inherit;
+    }
+
+    .user-message::before {
+      right: -10px;
+      border-left: none;
+      border-top: none;
+      border-radius: 0 0 0 20px;
+    }
+
+    .bot-message::before {
+      left: -10px;
+      border-right: none;
+      border-top: none;
+      border-radius: 0 0 20px 0;
+    }
+
+    .message-time {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+
+    .message-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .message-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-content ul:last-child,
+    .message-content ol:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .message:hover .message-actions {
+      opacity: 1;
+    }
+
+    .message-action-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      color: #9CA3AF;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+    }
+
+    .message-action-btn:hover {
+      background: rgba(139, 92, 246, 0.2);
+      color: #8B5CF6;
+      transform: translateZ(5px) scale(1.05);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    }
+
+    .message-action-btn i {
+      transform: translateZ(2px);
+    }
+
+    .message-status {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .message-status i {
+      font-size: 0.875rem;
+    }
+
+    .feature-card {
+      background: rgba(45, 45, 45, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .feature-card:hover {
+      transform: translateZ(5px) scale(1.02);
+      background: rgba(139, 92, 246, 0.2);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    .feature-card:active {
+      transform: translateZ(5px) scale(0.98);
+    }
+
+    .feature-card i {
+      color: #8b5cf6;
+      font-size: 1.2rem;
+      transform: translateZ(5px);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover i {
+      transform: translateZ(10px) scale(1.1);
+      color: #EC4899;
+    }
+
+    .feature-card span {
+      font-size: 1rem;
+      color: #e2e8f0;
+      transform: translateZ(5px);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover span {
+      transform: translateZ(10px);
+      color: #fff;
+    }
+
+    .mood-tracker {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding: 0.75rem;
+      background: rgba(17, 17, 17, 0.3);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      justify-content: center;
+    }
+
+    .mood-option {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1.5rem;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      backdrop-filter: blur(5px);
+    }
+
+    .mood-option:hover {
+      transform: translateZ(5px) scale(1.05);
+      background: rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .mood-option.selected {
+      background: rgba(139, 92, 246, 0.3);
+      border-color: rgba(139, 92, 246, 0.5);
+      transform: translateZ(10px) scale(1.05);
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .input-container {
+      display: flex;
+      gap: 0.75rem;
+      background: rgba(17, 17, 17, 0.3);
+      padding: 0.75rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .input-container:hover {
+      transform: translateZ(5px);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    #user-input {
+      flex: 1;
+      background: rgba(45, 45, 45, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      backdrop-filter: blur(5px);
+    }
+
+    #user-input:hover {
+      transform: translateZ(2px);
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.1);
+    }
+
+    #user-input:focus {
+      outline: none;
+      border-color: rgba(139, 92, 246, 0.5);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+      transform: translateZ(5px);
+    }
+
+    #send-btn, #voice-btn {
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 12px;
+      padding: 0.75rem 1.25rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      backdrop-filter: blur(5px);
+    }
+
+    #send-btn:hover, #voice-btn:hover {
+      background: rgba(139, 92, 246, 0.3);
+      transform: translateZ(5px) scale(1.02);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    #send-btn:active, #voice-btn:active {
+      transform: translateZ(5px) scale(0.95);
+    }
+
+    #voice-btn.recording {
+      background: rgba(239, 68, 68, 0.3);
+      border-color: rgba(239, 68, 68, 0.5);
+      animation: pulse 1.5s infinite;
+      transform: translateZ(10px);
+    }
+
+    @keyframes pulse {
+      0% { transform: translateZ(10px) scale(1); }
+      50% { transform: translateZ(10px) scale(1.02); }
+      100% { transform: translateZ(10px) scale(1); }
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: rgba(45, 45, 45, 0.5);
+      border-radius: 1rem;
+      margin: 1rem 0;
+      width: fit-content;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #8b5cf6;
+      border-radius: 50%;
+      animation: typing 1s infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      padding: 0.5rem;
+      background: rgba(17, 17, 17, 0.3);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-actions::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+      animation: pulse 3s infinite;
+    }
+
+    .quick-action-btn {
+      padding: 0.75rem 1.25rem;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-action-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.2), transparent);
+      animation: shine 2s infinite;
+    }
+
+    .quick-action-btn:hover {
+      background: rgba(139, 92, 246, 0.3);
+      transform: translateZ(5px) scale(1.02);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Welcome Overlay */
+    .welcome-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .welcome-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .welcome-card {
+      background: rgba(17, 17, 17, 0.9);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      transform: scale(0.8);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-overlay.active .welcome-card {
+      transform: scale(1);
+    }
+    .welcome-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      animation: rotate 10s linear infinite;
+    }
+    .welcome-emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      animation: wave 1s ease-in-out;
+    }
+    .welcome-text {
+      font-size: 2rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #8B5CF6, #EC4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .welcome-subtext {
+      color: #9CA3AF;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    .welcome-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: #9CA3AF;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .welcome-close:hover {
+      color: #8B5CF6;
+      background: rgba(139, 92, 246, 0.1);
+      transform: rotate(90deg);
+    }
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Saved Messages Panel */
+    .saved-messages-panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 400px;
+      height: 100vh;
+      background: rgba(17, 17, 17, 0.95);
+      backdrop-filter: blur(10px);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      transition: right 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .saved-messages-panel.active {
+      right: 0;
+    }
+
+    .saved-messages-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .saved-messages-header h2 {
+      color: #8B5CF6;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .close-saved-messages {
+      background: none;
+      border: none;
+      color: #9CA3AF;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .close-saved-messages:hover {
+      color: #8B5CF6;
+      transform: rotate(90deg);
+    }
+
+    .saved-message {
+      background: rgba(45, 45, 45, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .saved-message:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .saved-message-content {
+      color: #E2E8F0;
+      margin-bottom: 0.5rem;
+      max-height: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .saved-message-time {
+      color: #9CA3AF;
+      font-size: 0.875rem;
+    }
+
+    .saved-message-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .saved-message-btn {
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.875rem;
+    }
+
+    .saved-message-btn:hover {
+      background: rgba(139, 92, 246, 0.3);
+    }
+
+    .saved-message-btn.delete {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .saved-message-btn.delete:hover {
+      background: rgba(239, 68, 68, 0.3);
+    }
+
+    .saved-message-btn.download {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .saved-message-btn.download:hover {
+      background: rgba(34, 197, 94, 0.3);
+    }
+
+    .saved-messages-toggle {
+      position: fixed;
+      right: 2rem;
+      bottom: 2rem;
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 1rem;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .saved-messages-toggle:hover {
+      transform: scale(1.1);
+      background: rgba(139, 92, 246, 0.3);
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <header class="header p-4 flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <h1 class="text-2xl font-bold">Emotio <span>😌</span></h1>
+      <nav class="flex space-x-2">
+        <a href="/" class="nav-link active">
+          <i class="fas fa-comments"></i> Chat
+        </a>
+        <a href="/journal" class="nav-link">
+          <i class="fas fa-book"></i> Journal
+        </a>
+        <a href="/insights" class="nav-link">
+          <i class="fas fa-chart-line"></i> Insights
+        </a>
+        <a href="/counseling" class="nav-link">
+          <i class="fas fa-heart"></i> Counseling
+        </a>
+        <a href="/professionals" class="nav-link">
+          <i class="fas fa-user-md"></i> Professionals
+        </a>
+        <a href="/profile" class="nav-link">
+          <i class="fas fa-user"></i> Profile
+        </a>
+      </nav>
+    </div>
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Chat Interface -->
+      <div class="col-span-3">
+        <div class="card">
+          <div class="chat-container" id="chat-container">
+            <!-- Messages will be populated here -->
+          </div>
+          <div class="quick-actions">
+            <div class="quick-action-btn" data-action="gratitude">
+              <i class="fas fa-heart"></i> Gratitude
+            </div>
+            <div class="quick-action-btn" data-action="mindfulness">
+              <i class="fas fa-spa"></i> Mindfulness
+            </div>
+            <div class="quick-action-btn" data-action="stress">
+              <i class="fas fa-brain"></i> Stress Relief
+            </div>
+            <div class="quick-action-btn" data-action="sleep">
+              <i class="fas fa-moon"></i> Sleep Tips
+            </div>
+          </div>
+          <div class="mood-tracker">
+            <div class="mood-option" data-mood="happy">😊</div>
+            <div class="mood-option" data-mood="calm">😌</div>
+            <div class="mood-option" data-mood="neutral">😐</div>
+            <div class="mood-option" data-mood="anxious">😰</div>
+            <div class="mood-option" data-mood="sad">😢</div>
+          </div>
+          <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-btn">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+            <button id="voice-btn">
+              <i class="fas fa-microphone"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Panel -->
+      <div class="col-span-1">
+        <div class="card">
+          <h2 class="text-xl font-semibold mb-4">Quick Access</h2>
+          <div class="space-y-4">
+            <div class="feature-card" data-feature="journal">
+              <i class="fas fa-book text-violet-400"></i> New Journal Entry
+            </div>
+            <div class="feature-card" data-feature="meditation">
+              <i class="fas fa-spa text-violet-400"></i> Guided Meditation
+            </div>
+            <div class="feature-card" data-feature="breathing">
+              <i class="fas fa-wind text-violet-400"></i> Breathing Exercise
+            </div>
+            <div class="feature-card" data-feature="goals">
+              <i class="fas fa-bullseye text-violet-400"></i> Set Daily Goals
+            </div>
+            <div class="feature-card" data-feature="mood">
+              <i class="fas fa-chart-line text-violet-400"></i> Mood Analysis
+            </div>
+            <div class="feature-card" data-feature="resources">
+              <i class="fas fa-book-open text-violet-400"></i> Mental Health Resources
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Welcome Overlay -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-card">
+      <button class="welcome-close" onclick="closeWelcome()">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="welcome-emoji">👋</div>
+      <div class="welcome-text">Welcome back, <span id="welcomeUsername"></span>!</div>
+      <div class="welcome-subtext">Ready to continue your emotional journey?</div>
+    </div>
+  </div>
+
+  <!-- Saved Messages Panel -->
+  <div class="saved-messages-panel" id="savedMessagesPanel">
+    <div class="saved-messages-header">
+      <h2>Saved Messages</h2>
+      <button class="close-saved-messages" onclick="toggleSavedMessages()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div id="savedMessagesList">
+      <!-- Saved messages will be populated here -->
+    </div>
+  </div>
+
+  <button class="saved-messages-toggle" onclick="toggleSavedMessages()">
+    <i class="fas fa-bookmark"></i>
+  </button>
+
+  <script>
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const voiceBtn = document.getElementById('voice-btn');
+    const moodOptions = document.querySelectorAll('.mood-option');
+    const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+    const featureCards = document.querySelectorAll('.feature-card');
+    let selectedMood = null;
+    let recognition = null;
+
+    // Initialize speech recognition
+    if ('webkitSpeechRecognition' in window) {
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        userInput.value = transcript;
+        sendMessage();
+        voiceBtn.classList.remove('recording');
+      };
+
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        voiceBtn.classList.remove('recording');
+      };
+
+      recognition.onend = () => {
+        voiceBtn.classList.remove('recording');
+      };
+    }
+
+    // Mood selection
+    moodOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        moodOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        selectedMood = option.dataset.mood;
+        sendMessage(`I'm feeling ${option.dataset.mood} today.`);
+      });
+    });
+
+    // Quick actions
+    quickActionBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default behavior
+        const action = btn.dataset.action;
+        let message = '';
+        switch(action) {
+          case 'gratitude':
+            message = "Help me practice gratitude";
+            break;
+          case 'mindfulness':
+            message = "Guide me through a mindfulness exercise";
+            break;
+          case 'stress':
+            message = "I need help managing stress";
+            break;
+          case 'sleep':
+            message = "Give me some tips for better sleep";
+            break;
+        }
+        if (message) {
+          sendMessage(message);
+        }
+      });
+    });
+
+    // Feature cards
+    featureCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default behavior
+        const feature = card.dataset.feature;
+        switch(feature) {
+          case 'journal':
+            window.location.href = '/journal';
+            break;
+          case 'meditation':
+            sendMessage("Guide me through a meditation session");
+            break;
+          case 'breathing':
+            sendMessage("Help me with a breathing exercise");
+            break;
+          case 'goals':
+            sendMessage("Help me set some daily goals");
+            break;
+          case 'mood':
+            window.location.href = '/insights';
+            break;
+          case 'resources':
+            sendMessage("Show me some mental health resources");
+            break;
+        }
+      });
+    });
+
+    // Voice button
+    voiceBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (recognition) {
+        if (voiceBtn.classList.contains('recording')) {
+          recognition.stop();
+          voiceBtn.classList.remove('recording');
+        } else {
+          recognition.start();
+          voiceBtn.classList.add('recording');
+        }
+      } else {
+        alert('Speech recognition is not supported in your browser. Please use Chrome or Edge.');
+      }
+    });
+
+    // Send button and Enter key
+    sendBtn.addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent default behavior
+      sendMessage();
+    });
+
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault(); // Prevent default behavior
+        sendMessage();
+      }
+    });
+
+    async function sendMessage(message = null) {
+      const content = message || userInput.value.trim();
+      if (!content) return;
+
+      // Add user message to chat
+      addMessage(content, 'user');
+      userInput.value = '';
+
+      // Show typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'typing-indicator';
+      typingIndicator.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatContainer.appendChild(typingIndicator);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+
+      try {
+        const response = await fetch('/get-response', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_input: content,
+            mood: selectedMood
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Remove typing indicator
+        typingIndicator.remove();
+        
+        // Add bot response
+        if (data.reply) {
+          addMessage(data.reply, 'bot');
+        } else {
+          throw new Error('No reply received from server');
+        }
+        
+      } catch (error) {
+        console.error('Error:', error);
+        typingIndicator.remove();
+        addMessage("I'm here to listen and support you. How are you feeling today?", 'bot');
+      }
+    }
+
+    function addMessage(content, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      
+      // Format the content for bot messages
+      if (sender === 'bot') {
+        // Convert markdown-like formatting to HTML
+        let formattedContent = content
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+          .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic
+          .replace(/\n/g, '<br>') // Line breaks
+          .replace(/(\d+\.\s)/g, '<br>$1') // Numbered lists
+          .replace(/(\d+\.\s.*?)(?=\d+\.\s|$)/g, '<li>$1</li>') // List items
+          .replace(/<br><li>/g, '<li>') // Fix list formatting
+          .replace(/<br><br>/g, '<br>') // Remove double line breaks
+          .replace(/^###\s(.*?)$/gm, '<h3>$1</h3>') // Headers
+          .replace(/^>\s(.*?)$/gm, '<blockquote>$1</blockquote>') // Blockquotes
+          .replace(/`(.*?)`/g, '<code>$1</code>') // Inline code
+          .replace(/```(.*?)```/gs, '<pre><code>$1</code></pre>'); // Code blocks
+        
+        // Wrap in paragraph tags if needed
+        if (!formattedContent.includes('<li>') && !formattedContent.includes('<h3>') && 
+            !formattedContent.includes('<blockquote>') && !formattedContent.includes('<pre>')) {
+          formattedContent = formattedContent.split('<br>').map(p => `<p>${p}</p>`).join('');
+        }
+        
+        messageDiv.innerHTML = `
+          <div class="message-content">${formattedContent}</div>
+          <div class="message-actions">
+            <button class="message-action-btn" onclick="copyMessage(this)">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+            <button class="message-action-btn" onclick="saveMessage(this)">
+              <i class="fas fa-bookmark"></i> Save
+            </button>
+          </div>
+          <div class="message-status">
+            <i class="fas fa-check-circle"></i>
+            <span>${new Date().toLocaleTimeString()}</span>
+          </div>
+        `;
+      } else {
+        messageDiv.innerHTML = `
+          <div class="message-content">${content}</div>
+          <div class="message-status">
+            <i class="fas fa-check"></i>
+            <span>${new Date().toLocaleTimeString()}</span>
+          </div>
+        `;
+      }
+      
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Add message action functions
+    function copyMessage(button) {
+      const messageContent = button.closest('.message').querySelector('.message-content').textContent;
+      navigator.clipboard.writeText(messageContent).then(() => {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          button.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+
+    function saveMessage(button) {
+      const messageContent = button.closest('.message').querySelector('.message-content').textContent;
+      // Here you would typically save to a database or local storage
+      const originalText = button.innerHTML;
+      button.innerHTML = '<i class="fas fa-check"></i> Saved!';
+      setTimeout(() => {
+        button.innerHTML = originalText;
+      }, 2000);
+    }
+
+    // Initial greeting
+    addMessage("Hello! I'm here to support you. How can I help today?", 'bot');
+
+    // Welcome overlay functionality
+    function showWelcome(username) {
+      const overlay = document.getElementById('welcomeOverlay');
+      const usernameSpan = document.getElementById('welcomeUsername');
+      usernameSpan.textContent = username;
+      overlay.classList.add('active');
+      
+      // Close on click outside
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          closeWelcome();
+        }
+      });
+
+      // Clear the show_welcome flag after showing
+      fetch('/clear-welcome-flag', { method: 'POST' });
+    }
+
+    function closeWelcome() {
+      const overlay = document.getElementById('welcomeOverlay');
+      overlay.classList.remove('active');
+    }
+
+    // Check if we should show welcome message
+    const showWelcomeFlag = '{{ session.get("show_welcome") }}';
+    const username = '{{ session.get("username") }}';
+    
+    if (showWelcomeFlag === 'True') {
+      showWelcome(username);
+    }
+
+    // Saved Messages functionality
+    let savedMessages = JSON.parse(localStorage.getItem('savedMessages') || '[]');
+
+    function saveMessage(button) {
+      const messageContent = button.closest('.message').querySelector('.message-content').textContent;
+      const timestamp = new Date().toLocaleTimeString();
+      
+      savedMessages.push({
+        content: messageContent,
+        timestamp: timestamp
+      });
+      
+      localStorage.setItem('savedMessages', JSON.stringify(savedMessages));
+      
+      const originalText = button.innerHTML;
+      button.innerHTML = '<i class="fas fa-check"></i> Saved!';
+      setTimeout(() => {
+        button.innerHTML = originalText;
+      }, 2000);
+      
+      updateSavedMessagesList();
+    }
+
+    function deleteSavedMessage(index) {
+      savedMessages.splice(index, 1);
+      localStorage.setItem('savedMessages', JSON.stringify(savedMessages));
+      updateSavedMessagesList();
+    }
+
+    function updateSavedMessagesList() {
+      const savedMessagesList = document.getElementById('savedMessagesList');
+      // Sort messages in ascending order by timestamp
+      const sortedMessages = [...savedMessages].sort((a, b) => {
+        return new Date(a.timestamp) - new Date(b.timestamp);
+      });
+      
+      savedMessagesList.innerHTML = sortedMessages.map((msg, index) => `
+        <div class="saved-message">
+          <div class="saved-message-content">${msg.content}</div>
+          <div class="saved-message-time">${msg.timestamp}</div>
+          <div class="saved-message-actions">
+            <button class="saved-message-btn" onclick="copySavedMessage(${index})">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+            <button class="saved-message-btn download" onclick="downloadSavedMessage(${index})">
+              <i class="fas fa-download"></i> Download
+            </button>
+            <button class="saved-message-btn delete" onclick="deleteSavedMessage(${index})">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copySavedMessage(index) {
+      const message = savedMessages[index].content;
+      navigator.clipboard.writeText(message).then(() => {
+        const btn = document.querySelector(`.saved-message:nth-child(${index + 1}) .saved-message-btn`);
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+
+    function downloadSavedMessage(index) {
+      const message = savedMessages[index];
+      
+      // Format the content into bullet points and clear sections
+      const formattedContent = message.content
+        // Split into sentences
+        .replace(/([.!?])\s+/g, '$1\n')
+        // Convert numbered lists to bullet points
+        .replace(/(\d+\.\s)/g, '• ')
+        // Add section headers
+        .replace(/([A-Z][a-z]+:)/g, '\n\n📌 $1\n------------------')
+        // Convert paragraphs to bullet points
+        .split('\n')
+        .map(line => {
+          // Skip empty lines and existing bullet points
+          if (!line.trim() || line.trim().startsWith('•')) return line;
+          // Skip section headers
+          if (line.includes('📌')) return line;
+          // Convert to bullet point if it's a complete sentence
+          if (line.match(/[.!?]$/)) return '• ' + line;
+          return line;
+        })
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
+        .trim();
+
+      // Create a well-formatted text content
+      const content = `==========================================
+EMOTIO - SAVED MESSAGE
+==========================================
+
+📝 MESSAGE CONTENT
+------------------
+${formattedContent}
+
+⏰ TIMESTAMP
+-----------
+${message.timestamp}
+
+==========================================
+Generated by Emotio - Your Emotional Support Companion
+==========================================`;
+
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `emotio_message_${new Date().toISOString().slice(0,10)}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }
+
+    function toggleSavedMessages() {
+      const panel = document.getElementById('savedMessagesPanel');
+      panel.classList.toggle('active');
+      if (panel.classList.contains('active')) {
+        updateSavedMessagesList();
+      }
+    }
+
+    // Initialize saved messages list
+    updateSavedMessagesList();
+  </script>
+</body>
+</html>

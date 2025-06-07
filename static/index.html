@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .card {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .camera-container {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        #video {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
+        #canvas {
+            display: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #8B5CF6, #EC4899);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .result-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success {
+            color: #10B981;
+        }
+
+        .error {
+            color: #EF4444;
+        }
+
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #8B5CF6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            cursor: pointer;
+            display: block;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: 1rem;
+        }
+
+        .status-badge.ready {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        .status-badge.not-ready {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="card mb-8">
+            <h1 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Number Checker
+            </h1>
+            
+            <!-- Excel Upload Section -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-semibold">Excel Database</h2>
+                    <span id="excelStatus" class="status-badge not-ready">No file loaded</span>
+                </div>
+                <div class="file-upload">
+                    <button class="btn-primary w-full">
+                        <i class="fas fa-file-excel mr-2"></i>Upload Excel File
+                    </button>
+                    <input type="file" id="excelFile" accept=".xlsx,.xls" />
+                </div>
+            </div>
+
+            <div class="camera-container mb-6">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center gap-4 mb-6">
+                <button id="startCamera" class="btn-primary">
+                    <i class="fas fa-camera mr-2"></i>Start Camera
+                </button>
+                <button id="capture" class="btn-primary" disabled>
+                    <i class="fas fa-camera-retro mr-2"></i>Capture
+                </button>
+            </div>
+
+            <div id="result" class="result-message text-center text-xl font-semibold"></div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startButton = document.getElementById('startCamera');
+        const captureButton = document.getElementById('capture');
+        const resultDiv = document.getElementById('result');
+        const loading = document.querySelector('.loading');
+        const excelFileInput = document.getElementById('excelFile');
+        const excelStatus = document.getElementById('excelStatus');
+        let stream = null;
+
+        // Handle Excel file upload
+        excelFileInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            loading.classList.add('show');
+            excelStatus.textContent = 'Uploading...';
+            excelStatus.className = 'status-badge not-ready';
+
+            try {
+                const response = await fetch('/upload-excel', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    excelStatus.textContent = 'Ready';
+                    excelStatus.className = 'status-badge ready';
+                } else {
+                    excelStatus.textContent = 'Error';
+                    excelStatus.className = 'status-badge not-ready';
+                    alert(data.message || 'Error uploading Excel file');
+                }
+            } catch (err) {
+                console.error('Error uploading Excel:', err);
+                excelStatus.textContent = 'Error';
+                excelStatus.className = 'status-badge not-ready';
+                alert('Error uploading Excel file');
+            } finally {
+                loading.classList.remove('show');
+            }
+        });
+
+        startButton.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'environment',
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    } 
+                });
+                video.srcObject = stream;
+                video.style.display = 'block';
+                startButton.disabled = true;
+                captureButton.disabled = false;
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                alert('Error accessing camera. Please make sure you have granted camera permissions.');
+            }
+        });
+
+        captureButton.addEventListener('click', async () => {
+            if (excelStatus.textContent !== 'Ready') {
+                alert('Please upload an Excel file first');
+                return;
+            }
+
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            loading.classList.add('show');
+            resultDiv.classList.remove('show');
+
+            try {
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg'));
+                const formData = new FormData();
+                formData.append('image', blob, 'capture.jpg');
+
+                const response = await fetch('/check-number', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                resultDiv.textContent = data.message;
+                resultDiv.className = `result-message text-center text-xl font-semibold ${data.found ? 'success' : 'error'} show`;
+            } catch (err) {
+                console.error('Error processing image:', err);
+                resultDiv.textContent = 'Error processing image. Please try again.';
+                resultDiv.className = 'result-message text-center text-xl font-semibold error show';
+            } finally {
+                loading.classList.remove('show');
+            }
+        });
+
+        // Clean up camera stream when leaving the page
+        window.addEventListener('beforeunload', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+        });
+    </script>
+</body>
+</html> 

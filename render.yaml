@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: number-checker-app
+    env: python
+    buildCommand: |
+      apt-get update && apt-get install -y tesseract-ocr
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: TESSERACT_PATH
+        value: /usr/bin/tesseract 
