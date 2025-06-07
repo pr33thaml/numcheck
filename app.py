@@ -17,7 +17,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+# Get the absolute path to the templates directory
+template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates'))
+static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+
+app = Flask(__name__, 
+           template_folder=template_dir,
+           static_folder=static_dir)
 app.secret_key = 'n8x#mP9$vL2@qR5&jK7*wY3'  # Unique secret key for session management
 app.config['EXCEL_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
