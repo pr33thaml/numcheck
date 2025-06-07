@@ -10,6 +10,12 @@ import time
 import threading
 from playsound import playsound
 from dotenv import load_dotenv
+import logging
+import traceback
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
@@ -35,6 +41,20 @@ excel_lock = threading.Lock()
 # Configure Tesseract path for different environments
 if os.getenv('TESSERACT_PATH'):
     pytesseract.pytesseract.tesseract_cmd = os.getenv('TESSERACT_PATH')
+else:
+    # Try to find tesseract in common locations
+    common_paths = [
+        '/usr/bin/tesseract',
+        '/usr/local/bin/tesseract',
+        'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+    ]
+    for path in common_paths:
+        if os.path.exists(path):
+            pytesseract.pytesseract.tesseract_cmd = path
+            logger.info(f"Found Tesseract at: {path}")
+            break
+    else:
+        logger.warning("Tesseract not found in common locations")
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -223,6 +243,7 @@ def check_number():
         try:
             # Process the image and extract number
             number = process_image(filepath)
+            logger.info(f"Extracted number: {number}")
             
             if not number:
                 return jsonify({
@@ -237,7 +258,9 @@ def check_number():
             
             return jsonify(result)
         except Exception as e:
-            return jsonify({'error': str(e)}), 500
+            logger.error(f"Error processing image: {str(e)}")
+            logger.error(traceback.format_exc())
+            return jsonify({'error': f'Error processing image: {str(e)}'}), 500
     
     return jsonify({'error': 'Invalid file type'}), 400
 

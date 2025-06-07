@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Number Checker</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,21 +14,25 @@
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         .card {
             background: rgba(26, 26, 46, 0.6);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             transform-style: preserve-3d;
             transition: all 0.3s ease;
+            margin: 1rem;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+        @media (min-width: 768px) {
+            .card {
+                padding: 2rem;
+                margin: 0;
+            }
         }
 
         .camera-container {
@@ -39,11 +43,13 @@
             border-radius: 16px;
             overflow: hidden;
             background: rgba(0, 0, 0, 0.2);
+            aspect-ratio: 4/3;
         }
 
         #video {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: none;
         }
 
@@ -54,12 +60,21 @@
         .btn-primary {
             background: linear-gradient(45deg, #8B5CF6, #EC4899);
             border: none;
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 12px;
             color: white;
             font-weight: 600;
             transition: all 0.3s ease;
             transform-style: preserve-3d;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .btn-primary {
+                width: auto;
+                margin-bottom: 0;
+            }
         }
 
         .btn-primary:hover {
@@ -77,6 +92,10 @@
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s ease;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .result-message.show {
@@ -86,10 +105,12 @@
 
         .success {
             color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
         }
 
         .error {
             color: #EF4444;
+            background: rgba(239, 68, 68, 0.1);
         }
 
         .loading {
@@ -98,6 +119,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 10;
         }
 
         .loading.show {
@@ -122,7 +144,7 @@
         .file-upload {
             position: relative;
             overflow: hidden;
-            margin: 10px;
+            margin: 10px 0;
         }
 
         .file-upload input[type="file"] {
@@ -157,23 +179,36 @@
             background-color: rgba(239, 68, 68, 0.2);
             color: #EF4444;
         }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .button-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
     <div class="max-w-4xl mx-auto">
-        <div class="card mb-8">
-            <h1 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+        <div class="card">
+            <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                 Number Checker
             </h1>
             
             <!-- Excel Upload Section -->
-            <div class="mb-8">
+            <div class="mb-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-semibold">Excel Database</h2>
+                    <h2 class="text-lg md:text-xl font-semibold">Excel Database</h2>
                     <span id="excelStatus" class="status-badge not-ready">No file loaded</span>
                 </div>
                 <div class="file-upload">
-                    <button class="btn-primary w-full">
+                    <button class="btn-primary">
                         <i class="fas fa-file-excel mr-2"></i>Upload Excel File
                     </button>
                     <input type="file" id="excelFile" accept=".xlsx,.xls" />
@@ -188,7 +223,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-center gap-4 mb-6">
+            <div class="button-container mb-6">
                 <button id="startCamera" class="btn-primary">
                     <i class="fas fa-camera mr-2"></i>Start Camera
                 </button>
@@ -197,7 +232,7 @@
                 </button>
             </div>
 
-            <div id="result" class="result-message text-center text-xl font-semibold"></div>
+            <div id="result" class="result-message text-center text-lg md:text-xl font-semibold"></div>
         </div>
     </div>
 
