@@ -47,4 +47,8 @@ excel_files/
 
 # Uploads
 uploads/*
-!uploads/.gitkeep 
+!uploads/.gitkeep
+
+# Keep templates and static
+!templates/
+!static/ 
