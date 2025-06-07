@@ -3,7 +3,15 @@ services:
     name: number-checker-app
     env: python
     buildCommand: |
-      apt-get update && apt-get install -y tesseract-ocr
+      apt-get update && apt-get install -y \
+        tesseract-ocr \
+        build-essential \
+        python3-dev \
+        gcc \
+        g++ \
+        make \
+        cmake
+      pip install --upgrade pip
       pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
