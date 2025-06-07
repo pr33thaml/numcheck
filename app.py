@@ -18,7 +18,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-app.secret_key = 'n8x#mP9$vL2@qR5&jK7*wY3'  # Unique secret key for session management
+app.secret_key = os.environ.get('SECRET_KEY')  # Unique secret key for session management
 app.config['EXCEL_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
