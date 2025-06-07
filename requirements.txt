@@ -9,4 +9,6 @@ playsound==1.2.2
 gunicorn==20.1.0
 python-dotenv==0.19.0
 setuptools>=65.5.1
-wheel>=0.38.0 
+wheel>=0.38.0
+--only-binary :all:
+--prefer-binary 
