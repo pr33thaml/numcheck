@@ -188,9 +188,9 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .detected-number {
@@ -510,120 +510,335 @@
         .close-status:hover {
             opacity: 1;
         }
+
+        /* Add new styles for tabs */
+        .tab-container {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button.active {
+            background: rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .tab-button:hover {
+            background: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Updated styles for detected number */
+        .detected-number {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .detected-number div {
+            margin-bottom: 1rem;
+            min-width: max-content;
+        }
+        .detected-number div:last-child {
+            margin-bottom: 0;
+        }
+        .detected-number strong {
+            color: #8B5CF6;
+            margin-right: 8px;
+        }
+        .table-responsive {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(139, 92, 246, 0.5) rgba(26, 26, 46, 0.6);
+        }
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .table-responsive::-webkit-scrollbar-track {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 4px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 4px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.7);
+        }
+
+        /* Add new animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .recording-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 4px;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.7);
+        }
+        .detected-number {
+            transition: all 0.3s ease;
+        }
+        .detected-number:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Number Checker</h1>
-            <p>Upload your Excel file and speak the number</p>
+            <h1 id="pageTitle">Number Checker</h1>
         </div>
 
-        <div class="card">
-            <h2 class="text-xl font-semibold mb-4">Step 1: Upload Excel File</h2>
-            <form id="uploadForm" class="upload-form">
-                <div class="mb-3">
-                    <label for="excelFile" class="block mb-2">Select Excel File</label>
-                    <input type="file" class="form-control" id="excelFile" accept=".xlsx,.xls" required>
-                </div>
-                <button type="submit" class="btn">
-                    <i class="fas fa-upload"></i>
-                    Upload Excel
+        <div class="tab-container">
+            <div class="tab-nav">
+                <button class="tab-button active" data-tab="number-checker" data-title="Number Checker">
+                    <i class="fas fa-search"></i> Number Checker
                 </button>
-            </form>
-            <div id="fileStats" class="mt-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg" style="display: none;">
-                <h3 class="text-lg font-semibold mb-2">File Statistics</h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-sm text-gray-300">Total Rows:</p>
-                        <p class="text-lg font-semibold" id="totalRows">-</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-300">Total Columns:</p>
-                        <p class="text-lg font-semibold" id="totalColumns">-</p>
-                    </div>
-                </div>
+                <button class="tab-button" data-tab="cabinet-manager" data-title="Cabinet Manager">
+                    <i class="fas fa-cabinet"></i> Cabinet Manager
+                </button>
             </div>
-        </div>
 
-        <div class="card">
-            <h2 class="text-xl font-semibold mb-4">Step 2: Speak the Number</h2>
-            <p class="mb-4">Click the button below and speak the number</p>
-            <div class="recording-indicator" id="recordingIndicator">
-                <i class="fas fa-microphone"></i> Recording...
-            </div>
-            <div class="detected-number" id="detectedNumber"></div>
-            <div class="loading" id="loading">
-                <div class="loading-spinner"></div>
-                <p>Checking number...</p>
-            </div>
-            <div class="flex justify-center gap-4">
-                <button id="startRecording" class="btn" disabled>
-                    <i class="fas fa-microphone"></i> Start Recording
-                </button>
-                <button id="stopRecording" class="btn btn-danger" style="display: none;">
-                    <i class="fas fa-stop"></i> Stop Recording
-                </button>
-                <button id="checkNumber" class="btn" style="display: none;">
-                    <i class="fas fa-search"></i> Check Number
-                </button>
-            </div>
-        </div>
-
-        <div id="statusContainer" class="status-container">
-            <div id="status" class="status">
-                <button class="close-status" onclick="hideStatus()">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="status-icon"></div>
-                <div class="status-message"></div>
-                <div class="status-details"></div>
-            </div>
-        </div>
-        
-        <div id="matchesContainer" class="matches-container" style="display: none;">
-            <h3 class="text-lg font-semibold mb-3">Found Matches</h3>
-            <div id="matchesList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-        </div>
-
-        <div class="card">
-            <div class="history-header">
-                <h2 class="text-xl font-semibold">Search History</h2>
-                <button id="clearHistory" class="btn btn-danger">
-                    <i class="fas fa-trash"></i> Clear History
-                </button>
-            </div>
-            <div id="searchStats" class="mb-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-sm text-gray-300">Total Searches:</p>
-                        <p class="text-lg font-semibold" id="totalSearches">0</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-300">Success Rate:</p>
-                        <p class="text-lg font-semibold" id="successRate">0%</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-300">Found:</p>
-                        <p class="text-lg font-semibold" id="foundCount">0</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-300">Not Found:</p>
-                        <p class="text-lg font-semibold" id="notFoundCount">0</p>
+            <!-- Number Checker Tab -->
+            <div id="number-checker" class="tab-content active">
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4">Step 1: Upload Excel File</h2>
+                    <form id="uploadForm" class="upload-form">
+                        <div class="mb-3">
+                            <label for="excelFile" class="block mb-2">Select Excel File</label>
+                            <input type="file" class="form-control" id="excelFile" accept=".xlsx,.xls" required>
+                        </div>
+                        <button type="submit" class="btn">
+                            <i class="fas fa-upload"></i>
+                            Upload Excel
+                        </button>
+                    </form>
+                    <div id="fileStats" class="mt-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg" style="display: none;">
+                        <h3 class="text-lg font-semibold mb-2">File Statistics</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-300">Total Rows:</p>
+                                <p class="text-lg font-semibold" id="totalRows">-</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-300">Total Columns:</p>
+                                <p class="text-lg font-semibold" id="totalColumns">-</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <h2 class="text-xl font-semibold mb-4">Step 2: Speak the Number</h2>
+                    <p class="mb-4">Click the button below and speak the number</p>
+                    <div class="recording-indicator" id="recordingIndicator">
+                        <i class="fas fa-microphone"></i> Recording...
+                    </div>
+                    <div class="detected-number" id="detectedNumber"></div>
+                    <div class="loading" id="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Checking number...</p>
+                    </div>
+                    <div class="flex justify-center gap-4">
+                        <button id="startRecording" class="btn" disabled>
+                            <i class="fas fa-microphone"></i> Start Recording
+                        </button>
+                        <button id="stopRecording" class="btn btn-danger" style="display: none;">
+                            <i class="fas fa-stop"></i> Stop Recording
+                        </button>
+                        <button id="checkNumber" class="btn" style="display: none;">
+                            <i class="fas fa-search"></i> Check Number
+                        </button>
+                    </div>
+                </div>
+
+                <div id="statusContainer" class="status-container">
+                    <div id="status" class="status">
+                        <button class="close-status" onclick="hideStatus()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="status-icon"></div>
+                        <div class="status-message"></div>
+                        <div class="status-details"></div>
+                    </div>
+                </div>
+                
+                <div id="matchesContainer" class="matches-container" style="display: none;">
+                    <h3 class="text-lg font-semibold mb-3">Found Matches</h3>
+                    <div id="matchesList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+
+                <div class="card">
+                    <div class="history-header">
+                        <h2 class="text-xl font-semibold">Search History</h2>
+                        <button id="clearHistory" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Clear History
+                        </button>
+                    </div>
+                    <div id="searchStats" class="mb-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-300">Total Searches:</p>
+                                <p class="text-lg font-semibold" id="totalSearches">0</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-300">Success Rate:</p>
+                                <p class="text-lg font-semibold" id="successRate">0%</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-300">Found:</p>
+                                <p class="text-lg font-semibold" id="foundCount">0</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-300">Not Found:</p>
+                                <p class="text-lg font-semibold" id="notFoundCount">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="text-left p-2">Number</th>
+                                    <th class="text-left p-2">Status</th>
+                                    <th class="text-left p-2">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyList"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="history-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="text-left p-2">Number</th>
-                            <th class="text-left p-2">Status</th>
-                            <th class="text-left p-2">Time</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historyList"></tbody>
-                </table>
+
+            <!-- Cabinet Manager Tab -->
+            <div id="cabinet-manager" class="tab-content">
+                <div class="card">
+                    <h2 class="text-2xl font-semibold mb-4">Cabinet Management</h2>
+                    <div class="space-y-4">
+                        <!-- Voice Recording Section -->
+                        <div class="card bg-opacity-20 bg-purple-500 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4">Voice Input</h3>
+                            <p class="mb-4">Say the number and cabinet (e.g., "A1234 cabinet 1")</p>
+                            <div class="recording-indicator" id="cabinetRecordingIndicator">
+                                <i class="fas fa-microphone"></i> Recording...
+                            </div>
+                            <div class="detected-number" id="cabinetDetectedNumber"></div>
+                            <div class="flex justify-center gap-4">
+                                <button id="startCabinetRecording" class="btn">
+                                    <i class="fas fa-microphone"></i> Start Recording
+                                </button>
+                                <button id="stopCabinetRecording" class="btn btn-danger" style="display: none;">
+                                    <i class="fas fa-stop"></i> Stop Recording
+                                </button>
+                                <button id="addToExcel" class="btn" style="display: none;">
+                                    <i class="fas fa-plus"></i> Add to Excel
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Excel Preview Section -->
+                        <div class="col-md-6">
+                            <div class="excel-preview-container fade-in-up" style="background: rgba(26, 26, 46, 0.6); padding: 1.5rem; border-radius: 12px;">
+                                <h5 class="text-white mb-3">Excel Preview</h5>
+                                <div class="table-container">
+                                    <table class="table table-dark table-hover">
+                                        <tbody id="excelPreview">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button id="downloadExcel" class="btn btn-success">
+                                        <i class="fas fa-download"></i> Download Excel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -986,6 +1201,346 @@
 
         // Initial history load
         updateHistory();
+
+        // Add tab switching functionality with title change
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const pageTitle = document.getElementById('pageTitle');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+
+                    // Update page title
+                    pageTitle.textContent = button.getAttribute('data-title');
+                });
+            });
+
+            // Cabinet Manager Voice Recognition
+            let cabinetRecognition = null;
+            let cabinetRecording = false;
+            let detectedCabinetNumber = null;
+            let detectedNumber = null;
+
+            const startCabinetRecording = document.getElementById('startCabinetRecording');
+            const stopCabinetRecording = document.getElementById('stopCabinetRecording');
+            const addToExcel = document.getElementById('addToExcel');
+            const cabinetRecordingIndicator = document.getElementById('cabinetRecordingIndicator');
+            const cabinetDetectedNumber = document.getElementById('cabinetDetectedNumber');
+            const downloadExcel = document.getElementById('downloadExcel');
+
+            // Initialize cabinetData as an object with cabinet 1 pre-initialized
+            let cabinetData = {
+                "1": [] // Pre-initialize cabinet 1
+            };
+
+            function initCabinetRecognition() {
+                if (!('webkitSpeechRecognition' in window)) {
+                    alert('Speech recognition is not supported in this browser.');
+                    return;
+                }
+
+                cabinetRecognition = new webkitSpeechRecognition();
+                cabinetRecognition.continuous = true;
+                cabinetRecognition.interimResults = true;
+                cabinetRecognition.lang = 'en-US';
+                cabinetRecognition.maxAlternatives = 5; // Increased alternatives for better accuracy
+
+                cabinetRecognition.onresult = function(event) {
+                    const results = event.results;
+                    const lastResult = results[results.length - 1];
+                    
+                    if (lastResult.isFinal) {
+                        // Get all alternatives for better accuracy
+                        let bestResult = lastResult[0].transcript;
+                        let bestConfidence = lastResult[0].confidence;
+                        
+                        // Check all alternatives for better matches
+                        for (let i = 1; i < lastResult.length; i++) {
+                            const altResult = lastResult[i].transcript;
+                            // If this alternative has higher confidence or contains more numbers
+                            if (lastResult[i].confidence > bestConfidence || 
+                                (altResult.match(/\d/g) || []).length > (bestResult.match(/\d/g) || []).length) {
+                                bestResult = altResult;
+                                bestConfidence = lastResult[i].confidence;
+                            }
+                        }
+
+                        console.log('Speech result:', bestResult);
+                        
+                        // More flexible patterns to match different ways of saying "cabinet 1"
+                        const patterns = [
+                            /(.+?)\s+cabinet\s+(\d+)/i,  // Standard pattern
+                            /(.+?)\s+cabinet\s+one/i,    // "cabinet one"
+                            /(.+?)\s+cabinet\s+won/i,    // "cabinet won"
+                            /(.+?)\s+cabinet\s+1/i,      // "cabinet 1"
+                            /(.+?)\s+cabinet\s+first/i   // "cabinet first"
+                        ];
+                        
+                        let match = null;
+                        let matchedPattern = null;
+                        
+                        // Try each pattern
+                        for (let pattern of patterns) {
+                            const result = bestResult.match(pattern);
+                            if (result) {
+                                match = result;
+                                matchedPattern = pattern;
+                                break;
+                            }
+                        }
+                        
+                        if (match) {
+                            let inputNumber = match[1].trim();
+                            
+                            // Clean up the input number
+                            inputNumber = inputNumber
+                                .replace(/\s+/g, '') // Remove spaces
+                                .replace(/[^A-Za-z0-9]/g, '') // Remove special characters
+                                .toUpperCase(); // Convert to uppercase
+                            
+                            // Validate that the input contains only letters, numbers, or their combination
+                            if (/^[A-Za-z0-9]+$/.test(inputNumber)) {
+                                detectedNumber = inputNumber;
+                                
+                                // Handle different ways of saying "cabinet 1"
+                                if (matchedPattern.toString().includes('one') || 
+                                    matchedPattern.toString().includes('won') || 
+                                    matchedPattern.toString().includes('first')) {
+                                    detectedCabinetNumber = "1";
+                                } else {
+                                    detectedCabinetNumber = match[2];
+                                }
+                                
+                                // Show both the original and detected values for verification with better styling
+                                cabinetDetectedNumber.innerHTML = `
+                                    <div class="slide-in" style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                                        <strong>You said:</strong> "${bestResult}"
+                                    </div>
+                                    <div class="slide-in" style="background: rgba(236, 72, 153, 0.2); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                                        <strong>Detected Number:</strong> "${detectedNumber}"
+                                    </div>
+                                    <div class="slide-in" style="background: rgba(139, 92, 246, 0.2); padding: 10px; border-radius: 8px;">
+                                        <strong>Cabinet:</strong> ${detectedCabinetNumber}
+                                    </div>
+                                `;
+                                cabinetDetectedNumber.style.display = 'block';
+                                addToExcel.style.display = 'inline-flex';
+                                
+                                // Update max cabinet number
+                                maxCabinetNumber = Math.max(maxCabinetNumber, parseInt(detectedCabinetNumber));
+                                updateCabinetHeaders();
+                            } else {
+                                cabinetDetectedNumber.innerHTML = `
+                                    <div class="slide-in" style="background: rgba(236, 72, 153, 0.2); padding: 10px; border-radius: 8px;">
+                                        <strong>Invalid input. Please use only letters and numbers (e.g., "123AB34" or "AB123" cabinet 1)</strong>
+                                    </div>
+                                `;
+                                cabinetDetectedNumber.style.display = 'block';
+                                addToExcel.style.display = 'none';
+                            }
+                        } else {
+                            cabinetDetectedNumber.innerHTML = `
+                                <div class="slide-in" style="background: rgba(236, 72, 153, 0.2); padding: 10px; border-radius: 8px;">
+                                    <strong>Please say the number and cabinet (e.g., "123AB34" or "AB123" cabinet 1)</strong>
+                                </div>
+                            `;
+                        }
+                    }
+                };
+
+                cabinetRecognition.onend = function() {
+                    cabinetRecording = false;
+                    cabinetRecordingIndicator.classList.remove('active');
+                    startCabinetRecording.style.display = 'inline-flex';
+                    stopCabinetRecording.style.display = 'none';
+                };
+
+                cabinetRecognition.onerror = function(event) {
+                    console.error('Speech recognition error:', event.error);
+                    if (event.error === 'no-speech') {
+                        cabinetDetectedNumber.innerHTML = `
+                            <div class="slide-in" style="background: rgba(236, 72, 153, 0.2); padding: 10px; border-radius: 8px;">
+                                <strong>No speech detected. Please try again.</strong>
+                            </div>
+                        `;
+                    }
+                };
+            }
+
+            function updateCabinetHeaders() {
+                const headerRow = document.getElementById('cabinetHeaders');
+                headerRow.innerHTML = '';
+                
+                // Add headers for all cabinets up to maxCabinetNumber
+                for (let i = 1; i <= maxCabinetNumber; i++) {
+                    const th = document.createElement('th');
+                    th.className = 'p-2 text-left';
+                    th.textContent = `Cabinet ${i}`;
+                    headerRow.appendChild(th);
+                }
+            }
+
+            startCabinetRecording.addEventListener('click', function() {
+                console.log('Start recording clicked');
+                if (!cabinetRecognition) {
+                    initCabinetRecognition();
+                }
+                cabinetRecording = true;
+                detectedNumber = null;
+                detectedCabinetNumber = null;
+                cabinetRecognition.start();
+                cabinetRecordingIndicator.classList.add('active');
+                startCabinetRecording.style.display = 'none';
+                stopCabinetRecording.style.display = 'inline-flex';
+                cabinetDetectedNumber.textContent = 'Listening...';
+            });
+
+            stopCabinetRecording.addEventListener('click', function() {
+                console.log('Stop recording clicked');
+                if (cabinetRecording) {
+                    cabinetRecognition.stop();
+                }
+            });
+
+            addToExcel.addEventListener('click', function() {
+                console.log('Add to Excel clicked with:', { detectedNumber, detectedCabinetNumber }); // Debug log
+                
+                if (detectedNumber && detectedCabinetNumber) {
+                    // Convert cabinet number to string to ensure consistent key type
+                    const cabinetKey = detectedCabinetNumber.toString();
+                    
+                    // Ensure cabinetData is initialized for this cabinet number
+                    if (!cabinetData[cabinetKey]) {
+                        console.log('Initializing new cabinet:', cabinetKey); // Debug log
+                        cabinetData[cabinetKey] = [];
+                    }
+                    
+                    // Add the number to the cabinet's array with timestamp
+                    cabinetData[cabinetKey].push({
+                        number: detectedNumber,
+                        timestamp: Date.now()
+                    });
+                    
+                    console.log('Updated cabinet data:', cabinetData); // Debug log
+                    
+                    // Force update the preview
+                    updateExcelPreview();
+                    
+                    // Clear the detected number display
+                    cabinetDetectedNumber.style.display = 'none';
+                    addToExcel.style.display = 'none';
+                    detectedNumber = '';
+                    detectedCabinetNumber = '';
+                }
+            });
+
+            function updateExcelPreview() {
+                console.log('Updating Excel preview with data:', cabinetData); // Debug log
+                const preview = document.getElementById('excelPreview');
+                preview.innerHTML = '';
+                
+                // Convert cabinetData object to array of entries
+                const entries = [];
+                for (let cabinet in cabinetData) {
+                    console.log('Processing cabinet:', cabinet, 'with data:', cabinetData[cabinet]); // Debug log
+                    const numbers = cabinetData[cabinet];
+                    if (Array.isArray(numbers)) {
+                        numbers.forEach(entry => {
+                            entries.push({
+                                cabinet: cabinet,
+                                number: entry.number || entry, // Handle both new and old format
+                                timestamp: entry.timestamp || Date.now()
+                            });
+                        });
+                    }
+                }
+                
+                // Sort entries by timestamp in descending order (latest first)
+                const sortedEntries = entries.sort((a, b) => b.timestamp - a.timestamp);
+
+                console.log('Sorted entries for display:', sortedEntries); // Debug log
+
+                sortedEntries.forEach(entry => {
+                    const row = document.createElement('tr');
+                    row.className = 'slide-in';
+                    row.innerHTML = `
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="color: #8B5CF6; font-weight: 500;">Cabinet ${entry.cabinet}:</span>
+                                <span style="color: #EC4899;">${entry.number}</span>
+                            </div>
+                        </td>
+                    `;
+                    preview.appendChild(row);
+                });
+            }
+
+            downloadExcel.addEventListener('click', function() {
+                console.log('Downloading Excel with data:', cabinetData); // Debug log
+                
+                // Create a workbook
+                const wb = XLSX.utils.book_new();
+                
+                // Get all cabinet numbers and sort them
+                const cabinetNumbers = Object.keys(cabinetData).sort((a, b) => parseInt(a) - parseInt(b));
+                
+                // Create headers (without number column)
+                const headers = cabinetNumbers.map(num => `Cabinet ${num}`);
+                
+                // Find the maximum number of entries in any cabinet
+                let maxEntries = 0;
+                cabinetNumbers.forEach(cabinet => {
+                    maxEntries = Math.max(maxEntries, cabinetData[cabinet].length);
+                });
+                
+                // Create data rows
+                const wsData = [headers];
+                for (let i = 0; i < maxEntries; i++) {
+                    const row = [];
+                    // Add data for each cabinet
+                    cabinetNumbers.forEach(cabinet => {
+                        const numbers = cabinetData[cabinet];
+                        const entry = numbers[i];
+                        // Handle both new and old format
+                        const value = entry && (entry.number || entry);
+                        row.push(value || ''); // Empty string if no entry
+                    });
+                    wsData.push(row);
+                }
+                
+                console.log('Excel data to be written:', wsData); // Debug log
+                
+                // Create worksheet
+                const ws = XLSX.utils.aoa_to_sheet(wsData);
+                
+                // Add worksheet to workbook
+                XLSX.utils.book_append_sheet(wb, ws, "Cabinet Data");
+                
+                // Generate timestamp for filename in a more natural format
+                const now = new Date();
+                const day = now.getDate();
+                const month = now.toLocaleString('en-US', { month: 'long' });
+                const year = now.getFullYear();
+                const time = now.toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: true
+                }).toLowerCase();
+                
+                // Generate Excel file with natural timestamp
+                XLSX.writeFile(wb, `cabinet_data_${day}th_${month}_${year}_${time}.xlsx`);
+            });
+        });
     </script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
 </body>
 </html> 

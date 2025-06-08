@@ -1,10 +1,14 @@
 import os
+from dotenv import load_dotenv
 import pandas as pd
 from flask import Flask, request, jsonify, render_template, session
 from werkzeug.utils import secure_filename
 import logging
 from datetime import datetime
 import json
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
