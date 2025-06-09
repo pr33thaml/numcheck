@@ -2048,3 +2048,8 @@ ModuleNotFoundError: No module named 'xlsxwriter'
 2025-06-09 14:52:48,444 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:48] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
 2025-06-09 14:52:50,760 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:50] "GET /export-search-history HTTP/1.1" 200 -
 2025-06-09 14:52:50,766 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 21:36:34,594 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 21:36:34,594 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 21:36:35,309 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 21:36:35,696 - WARNING -  * Debugger is active!
+2025-06-09 21:36:35,698 - INFO -  * Debugger PIN: 130-034-314
