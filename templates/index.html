@@ -738,7 +738,7 @@
         </div>
 
         <!-- Text Input Section -->
-        <div class="card mt-4">
+        <div class="card">
             <h2 class="text-xl font-semibold mb-4">Or Type the Number</h2>
             <div class="flex flex-col items-center gap-4">
                 <input type="text" id="numberInput" class="w-full max-w-md px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-purple-500" placeholder="Enter number (e.g., A1234, a1234, or 1234)">
@@ -746,6 +746,11 @@
                     <i class="fas fa-search"></i> Check Number
                 </button>
             </div>
+        </div>
+
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Results</h2>
+            <div id="results" class="w-full"></div>
         </div>
 
         <div id="statusContainer" class="status-container">
@@ -1702,27 +1707,25 @@
             });
         });
 
-        // Text Input Functionality
+        // Text Input Event Listeners
         document.getElementById('checkTypedNumber').addEventListener('click', function() {
             const inputValue = document.getElementById('numberInput').value.trim();
             if (inputValue) {
-                currentNumber = inputValue; // Set the current number
+                currentNumber = inputValue;
                 document.getElementById('detectedNumber').textContent = `Input: ${inputValue.toUpperCase()}`;
                 document.getElementById('detectedNumber').style.display = 'block';
-                checkNumber(inputValue); // Directly check the number
+                checkNumber(inputValue);
             } else {
                 showStatus('Please enter a number', 'error');
             }
         });
 
-        // Add enter key support for the input field
         document.getElementById('numberInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 document.getElementById('checkTypedNumber').click();
             }
         });
 
-        // Add input event to show alternatives as user types
         document.getElementById('numberInput').addEventListener('input', function(e) {
             const inputValue = e.target.value.trim();
             if (inputValue) {

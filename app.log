@@ -2048,59 +2048,33 @@ ModuleNotFoundError: No module named 'xlsxwriter'
 2025-06-09 14:52:48,444 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:48] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
 2025-06-09 14:52:50,760 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:50] "GET /export-search-history HTTP/1.1" 200 -
 2025-06-09 14:52:50,766 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
-2025-06-09 21:36:34,594 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
-2025-06-09 21:36:34,594 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
-2025-06-09 21:36:35,309 - INFO -  * Restarting with watchdog (windowsapi)
-2025-06-09 21:36:35,696 - WARNING -  * Debugger is active!
-2025-06-09 21:36:35,698 - INFO -  * Debugger PIN: 130-034-314
-2025-06-09 21:42:53,183 - INFO - 127.0.0.1 - - [09/Jun/2025 21:42:53] "GET /get-history HTTP/1.1" 200 -
-2025-06-09 21:42:53,400 - INFO - 127.0.0.1 - - [09/Jun/2025 21:42:53] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
-2025-06-09 21:44:03,356 - INFO - 127.0.0.1 - - [09/Jun/2025 21:44:03] "GET / HTTP/1.1" 200 -
-2025-06-09 21:44:03,457 - INFO - 127.0.0.1 - - [09/Jun/2025 21:44:03] "GET /get-history HTTP/1.1" 200 -
-2025-06-09 21:44:03,517 - INFO - 127.0.0.1 - - [09/Jun/2025 21:44:03] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
-2025-06-09 21:44:03,517 - INFO - 127.0.0.1 - - [09/Jun/2025 21:44:03] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
-2025-06-09 21:44:03,517 - INFO - 127.0.0.1 - - [09/Jun/2025 21:44:03] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
-2025-06-09 21:44:03,519 - INFO - 127.0.0.1 - - [09/Jun/2025 21:44:03] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
-2025-06-09 21:44:14,711 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
-2025-06-09 21:44:15,481 - INFO -  * Restarting with watchdog (windowsapi)
-2025-06-09 21:45:33,032 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2025-06-09 21:56:39,875 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.0.103:5000
-2025-06-09 21:45:33,032 - INFO - [33mPress CTRL+C to quit[0m
-2025-06-09 21:45:33,036 - INFO -  * Restarting with watchdog (windowsapi)
-2025-06-09 21:45:33,399 - WARNING -  * Debugger is active!
-2025-06-09 21:45:33,401 - INFO -  * Debugger PIN: 130-034-314
-2025-06-09 21:45:46,221 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:46] "[35m[1mGET / HTTP/1.1[0m" 500 -
-2025-06-09 21:45:46,285 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:46] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
-2025-06-09 21:45:46,285 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:46] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
-2025-06-09 21:45:46,291 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:46] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=IvUA4PRGwrFfvTcn7jXl HTTP/1.1" 200 -
-2025-06-09 21:45:46,337 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:46] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
-2025-06-09 21:45:49,971 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:49] "[35m[1mGET / HTTP/1.1[0m" 500 -
-2025-06-09 21:45:49,991 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:49] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
-2025-06-09 21:45:49,991 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:49] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
-2025-06-09 21:45:50,005 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:50] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=IvUA4PRGwrFfvTcn7jXl HTTP/1.1[0m" 304 -
-2025-06-09 21:45:50,048 - INFO - 127.0.0.1 - - [09/Jun/2025 21:45:50] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
-2025-06-09 21:46:39,510 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:39] "[35m[1mGET / HTTP/1.1[0m" 500 -
-2025-06-09 21:46:39,534 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:39] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
-2025-06-09 21:46:39,534 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:39] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
-2025-06-09 21:46:39,626 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:39] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png&s=IvUA4PRGwrFfvTcn7jXl HTTP/1.1[0m" 304 -
-2025-06-09 21:46:50,847 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
-2025-06-09 21:46:50,849 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
-2025-06-09 21:46:50,850 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
-2025-06-09 21:46:51,604 - INFO -  * Restarting with watchdog (windowsapi)
-2025-06-09 21:46:51,985 - WARNING -  * Debugger is active!
-2025-06-09 21:46:51,988 - INFO -  * Debugger PIN: 130-034-314
-2025-06-09 21:46:57,310 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "GET / HTTP/1.1" 200 -
-2025-06-09 21:46:57,379 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "GET /get-history HTTP/1.1" 200 -
-2025-06-09 21:46:57,383 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/correct.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,384 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/incorrect.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,385 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/done.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,386 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/incorrect.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,536 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/correct.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,537 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/incorrect.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,538 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/done.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:46:57,539 - INFO - 127.0.0.1 - - [09/Jun/2025 21:46:57] "[33mGET /static/incorrect.mp3 HTTP/1.1[0m" 404 -
-2025-06-09 21:47:03,903 - ERROR - No Excel data file found in session or on disk.
-2025-06-09 21:47:03,903 - INFO - 127.0.0.1 - - [09/Jun/2025 21:47:03] "POST /check-number HTTP/1.1" 200 -
-2025-06-09 21:47:03,909 - INFO - 127.0.0.1 - - [09/Jun/2025 21:47:03] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 21:56:39,876 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 21:56:39,879 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 21:56:40,249 - WARNING -  * Debugger is active!
+2025-06-09 21:56:40,252 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 21:56:42,202 - INFO - 127.0.0.1 - - [09/Jun/2025 21:56:42] "GET / HTTP/1.1" 200 -
+2025-06-09 21:56:42,371 - INFO - 127.0.0.1 - - [09/Jun/2025 21:56:42] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 21:56:42,439 - INFO - 127.0.0.1 - - [09/Jun/2025 21:56:42] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 21:56:42,440 - INFO - 127.0.0.1 - - [09/Jun/2025 21:56:42] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 21:56:42,441 - INFO - 127.0.0.1 - - [09/Jun/2025 21:56:42] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 21:56:42,442 - INFO - 127.0.0.1 - - [09/Jun/2025 21:56:42] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 21:57:09,554 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 21:57:09,554 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 21:57:10,375 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 21:57:10,762 - WARNING -  * Debugger is active!
+2025-06-09 21:57:10,765 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 21:57:17,233 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 21:57:17,234 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 21:57:17,234 - INFO - 127.0.0.1 - - [09/Jun/2025 21:57:17] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 21:57:17,240 - INFO - 127.0.0.1 - - [09/Jun/2025 21:57:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 21:57:17,240 - INFO - 127.0.0.1 - - [09/Jun/2025 21:57:17] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 21:57:17,240 - INFO - 127.0.0.1 - - [09/Jun/2025 21:57:17] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 21:59:11,170 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 21:59:11,172 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 21:59:12,023 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 21:59:12,404 - WARNING -  * Debugger is active!
+2025-06-09 21:59:12,406 - INFO -  * Debugger PIN: 130-034-314
