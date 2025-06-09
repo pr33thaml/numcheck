@@ -1572,3 +1572,115 @@ ModuleNotFoundError: No module named 'xlsxwriter'
 2025-06-08 17:21:30,889 - INFO - 127.0.0.1 - - [08/Jun/2025 17:21:30] "GET /get-history HTTP/1.1" 200 -
 2025-06-08 17:21:43,195 - INFO - 127.0.0.1 - - [08/Jun/2025 17:21:43] "POST /check-number HTTP/1.1" 200 -
 2025-06-08 17:21:43,209 - INFO - 127.0.0.1 - - [08/Jun/2025 17:21:43] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:14:04,621 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:14:04,621 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:14:07,608 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "GET / HTTP/1.1" 200 -
+2025-06-09 14:14:07,798 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:14:07,850 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:14:07,851 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:14:07,851 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:14:07,853 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:14:07,901 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:14:13,484 - INFO - Excel file uploaded successfully. Rows: 4607, Columns: 2
+2025-06-09 14:14:13,485 - INFO - Session data size: 170163 bytes
+2025-06-09 14:14:13,493 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:13] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:14:13,498 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:14:29,169 - ERROR - No Excel data found in session
+2025-06-09 14:14:29,169 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:29] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:14:29,172 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:29] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:14:31,489 - ERROR - No Excel data found in session
+2025-06-09 14:14:31,489 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:31] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:14:31,504 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:31] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:14:46,337 - ERROR - No Excel data found in session
+2025-06-09 14:14:46,338 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:46] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:14:46,355 - INFO - 127.0.0.1 - - [09/Jun/2025 14:14:46] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:16:24,575 - INFO - Excel file uploaded successfully. Rows: 4607, Columns: 2
+2025-06-09 14:16:24,576 - INFO - Session data size: 170162 bytes
+2025-06-09 14:16:24,584 - INFO - 127.0.0.1 - - [09/Jun/2025 14:16:24] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:16:29,857 - ERROR - No Excel data found in session
+2025-06-09 14:16:29,857 - INFO - 127.0.0.1 - - [09/Jun/2025 14:16:29] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:16:29,868 - INFO - 127.0.0.1 - - [09/Jun/2025 14:16:29] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:16:32,097 - INFO - 127.0.0.1 - - [09/Jun/2025 14:16:32] "POST /clear-history HTTP/1.1" 200 -
+2025-06-09 14:16:32,103 - INFO - 127.0.0.1 - - [09/Jun/2025 14:16:32] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:19:14,072 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:19:14,072 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:19:17,428 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:17] "GET / HTTP/1.1" 200 -
+2025-06-09 14:19:17,497 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:17] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:19:17,557 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:17] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:19:17,557 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:17] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:19:17,558 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:17] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:19:17,560 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:17] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:19:18,248 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:18] "GET / HTTP/1.1" 200 -
+2025-06-09 14:19:18,268 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:18] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:19:23,427 - INFO - Excel file uploaded successfully. Rows: 4607, Columns: 2
+2025-06-09 14:19:23,428 - INFO - Session data size: 170162 bytes
+2025-06-09 14:19:23,436 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:23] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:19:23,441 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:19:28,735 - ERROR - No Excel data found in session
+2025-06-09 14:19:28,736 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:28] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:19:28,747 - INFO - 127.0.0.1 - - [09/Jun/2025 14:19:28] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:22:05,366 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:22:05,366 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:22:05,384 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:22:05,748 - WARNING -  * Debugger is active!
+2025-06-09 14:22:05,750 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:22:08,485 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:08] "GET / HTTP/1.1" 200 -
+2025-06-09 14:22:08,537 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:08] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:22:12,320 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:22:12,320 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:22:12,321 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:12] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:22:12,327 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:12] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:22:17,495 - INFO - Processing number: 2454.
+2025-06-09 14:22:17,496 - INFO - Excel data rows: 4607
+2025-06-09 14:22:17,496 - INFO - Search patterns: {'2454', '2454.'}
+2025-06-09 14:22:17,498 - INFO - Found matches: 1
+2025-06-09 14:22:17,499 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:17] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:22:17,503 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:17] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:22:36,955 - INFO - Processing number: S0017.
+2025-06-09 14:22:36,955 - INFO - Excel data rows: 4607
+2025-06-09 14:22:36,955 - INFO - Search patterns: {'0017', 's0017.', 's0017'}
+2025-06-09 14:22:36,957 - INFO - Found matches: 1
+2025-06-09 14:22:36,958 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:36] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:22:36,962 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:36] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:22:49,225 - INFO - Processing number: S0083.
+2025-06-09 14:22:49,225 - INFO - Excel data rows: 4607
+2025-06-09 14:22:49,226 - INFO - Search patterns: {'s0083', '0083', 's0083.'}
+2025-06-09 14:22:49,229 - INFO - Found matches: 1
+2025-06-09 14:22:49,230 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:49] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:22:49,237 - INFO - 127.0.0.1 - - [09/Jun/2025 14:22:49] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:25:12,772 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:25:12,772 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:25:12,776 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:25:13,149 - WARNING -  * Debugger is active!
+2025-06-09 14:25:13,151 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:25:17,081 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:17] "GET / HTTP/1.1" 200 -
+2025-06-09 14:25:17,151 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:17] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:25:17,181 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:17] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:25:30,756 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:25:30,756 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:25:30,757 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:30] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:25:30,761 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:25:38,139 - INFO - Processing number: S0085.
+2025-06-09 14:25:38,140 - INFO - Excel data rows: 4607
+2025-06-09 14:25:38,140 - INFO - Search patterns: {'s0085.', '0085', 's0085'}
+2025-06-09 14:25:38,142 - INFO - Found matches: 1
+2025-06-09 14:25:38,143 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:38] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:25:38,149 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:38] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:25:49,441 - INFO - Processing number: S0089.
+2025-06-09 14:25:49,442 - INFO - Excel data rows: 4607
+2025-06-09 14:25:49,442 - INFO - Search patterns: {'0089', 's0089.', 's0089'}
+2025-06-09 14:25:49,445 - INFO - Found matches: 0
+2025-06-09 14:25:49,446 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:49] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:25:49,452 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:49] "GET /get-history HTTP/1.1" 200 -
