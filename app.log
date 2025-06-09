@@ -1684,3 +1684,367 @@ ModuleNotFoundError: No module named 'xlsxwriter'
 2025-06-09 14:25:49,445 - INFO - Found matches: 0
 2025-06-09 14:25:49,446 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:49] "POST /check-number HTTP/1.1" 200 -
 2025-06-09 14:25:49,452 - INFO - 127.0.0.1 - - [09/Jun/2025 14:25:49] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:34:13,854 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:34:13,855 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:34:13,859 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:34:14,246 - WARNING -  * Debugger is active!
+2025-06-09 14:34:14,249 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:34:28,049 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:28] "GET / HTTP/1.1" 200 -
+2025-06-09 14:34:28,121 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:28] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:34:28,191 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:28] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:34:28,193 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:28] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:34:28,194 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:28] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:34:28,195 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:28] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:34:33,916 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:34:33,917 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:34:33,917 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:33] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:34:33,921 - INFO - 127.0.0.1 - - [09/Jun/2025 14:34:33] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:35:26,873 - ERROR - Error exporting search history to Excel: 'matches'
+2025-06-09 14:35:26,873 - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "c:\Users\Maverick\Documents\numcheck\app.py", line 285, in export_search_history
+    for match in entry['matches']:
+                 ~~~~~^^^^^^^^^^^
+KeyError: 'matches'
+2025-06-09 14:35:26,874 - INFO - 127.0.0.1 - - [09/Jun/2025 14:35:26] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:35:26,906 - INFO - 127.0.0.1 - - [09/Jun/2025 14:35:26] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:36:21,328 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:36:21,328 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:36:21,332 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:36:21,705 - WARNING -  * Debugger is active!
+2025-06-09 14:36:21,708 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:36:26,862 - INFO - 127.0.0.1 - - [09/Jun/2025 14:36:26] "GET / HTTP/1.1" 200 -
+2025-06-09 14:36:26,881 - INFO - 127.0.0.1 - - [09/Jun/2025 14:36:26] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:36:26,916 - INFO - 127.0.0.1 - - [09/Jun/2025 14:36:26] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:36:30,810 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:36:30,811 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:36:30,811 - INFO - 127.0.0.1 - - [09/Jun/2025 14:36:30] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:36:30,817 - INFO - 127.0.0.1 - - [09/Jun/2025 14:36:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:39:05,569 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:39:05,569 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:39:05,573 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:39:05,944 - WARNING -  * Debugger is active!
+2025-06-09 14:39:05,946 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:39:17,114 - INFO - 127.0.0.1 - - [09/Jun/2025 14:39:17] "GET / HTTP/1.1" 200 -
+2025-06-09 14:39:17,135 - INFO - 127.0.0.1 - - [09/Jun/2025 14:39:17] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:39:20,529 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:39:20,529 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:39:20,529 - INFO - 127.0.0.1 - - [09/Jun/2025 14:39:20] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:39:23,980 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:39:23,981 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:39:23,981 - INFO - 127.0.0.1 - - [09/Jun/2025 14:39:23] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:40:26,251 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:40:26,251 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:40:26,255 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:40:26,631 - WARNING -  * Debugger is active!
+2025-06-09 14:40:26,633 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:40:36,042 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:36] "GET / HTTP/1.1" 200 -
+2025-06-09 14:40:36,060 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:36] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:40:36,124 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:36] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:40:36,126 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:36] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:40:36,127 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:36] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:40:36,128 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:36] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:40:42,631 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:40:42,631 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:40:42,632 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:42] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:40:42,636 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:40:48,737 - INFO - Processing number: 2454
+2025-06-09 14:40:48,737 - INFO - Excel data rows: 4607
+2025-06-09 14:40:48,737 - INFO - Search patterns: {'2454'}
+2025-06-09 14:40:48,738 - INFO - Found matches: 1
+2025-06-09 14:40:48,739 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:48] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:40:48,746 - INFO - 127.0.0.1 - - [09/Jun/2025 14:40:48] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:10,179 - INFO - Processing number: s0103
+2025-06-09 14:41:10,179 - INFO - Excel data rows: 4607
+2025-06-09 14:41:10,180 - INFO - Search patterns: {'s0103', '0103'}
+2025-06-09 14:41:10,182 - INFO - Found matches: 1
+2025-06-09 14:41:10,183 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:10] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:41:10,188 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:10] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:19,545 - INFO - Processing number: s0088
+2025-06-09 14:41:19,545 - INFO - Excel data rows: 4607
+2025-06-09 14:41:19,545 - INFO - Search patterns: {'s0088', '0088'}
+2025-06-09 14:41:19,548 - INFO - Found matches: 1
+2025-06-09 14:41:19,548 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:19] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:41:19,553 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:19] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:21,354 - INFO - Processing number: s0088
+2025-06-09 14:41:21,354 - INFO - Excel data rows: 4607
+2025-06-09 14:41:21,354 - INFO - Search patterns: {'s0088', '0088'}
+2025-06-09 14:41:21,356 - INFO - Found matches: 1
+2025-06-09 14:41:21,357 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:21] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:41:21,363 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:21] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:24,059 - INFO - Processing number: s0088
+2025-06-09 14:41:24,059 - INFO - Excel data rows: 4607
+2025-06-09 14:41:24,059 - INFO - Search patterns: {'s0088', '0088'}
+2025-06-09 14:41:24,061 - INFO - Found matches: 1
+2025-06-09 14:41:24,062 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:24] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:41:24,066 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:24] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:31,754 - INFO - Processing number: s0058.
+2025-06-09 14:41:31,754 - INFO - Excel data rows: 4607
+2025-06-09 14:41:31,754 - INFO - Search patterns: {'s0058.', '0058', 's0058'}
+2025-06-09 14:41:31,756 - INFO - Found matches: 1
+2025-06-09 14:41:31,756 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:31] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:41:31,761 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:31] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:39,977 - INFO - Processing number: s0019
+2025-06-09 14:41:39,978 - INFO - Excel data rows: 4607
+2025-06-09 14:41:39,979 - INFO - Search patterns: {'0019', 's0019'}
+2025-06-09 14:41:39,981 - INFO - Found matches: 1
+2025-06-09 14:41:39,982 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:39] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:41:39,987 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:39] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:41:48,610 - ERROR - Error exporting search history to Excel: 'matches'
+2025-06-09 14:41:48,610 - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "c:\Users\Maverick\Documents\numcheck\app.py", line 285, in export_search_history
+    for match in entry['matches']:
+                 ~~~~~^^^^^^^^^^^
+KeyError: 'matches'
+2025-06-09 14:41:48,612 - INFO - 127.0.0.1 - - [09/Jun/2025 14:41:48] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:43:41,641 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:43:41,642 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:43:42,025 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:43:42,404 - WARNING -  * Debugger is active!
+2025-06-09 14:43:42,407 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:45:34,631 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:45:34,631 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:45:34,641 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:45:35,636 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:45:36,028 - WARNING -  * Debugger is active!
+2025-06-09 14:45:36,031 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:45:36,085 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:45:36,086 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:45:37,112 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:45:37,507 - WARNING -  * Debugger is active!
+2025-06-09 14:45:37,509 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:46:22,304 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:46:22,305 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:46:22,305 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:46:22,657 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:46:23,042 - WARNING -  * Debugger is active!
+2025-06-09 14:46:23,045 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:46:29,276 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:46:29,276 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:46:29,280 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:46:29,649 - WARNING -  * Debugger is active!
+2025-06-09 14:46:29,652 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:46:32,782 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:32] "GET / HTTP/1.1" 200 -
+2025-06-09 14:46:32,853 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:32] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:46:32,905 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:32] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:46:32,905 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:32] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:46:32,906 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:32] "[35m[1mGET /static/done.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:46:32,908 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:32] "[35m[1mGET /static/incorrect.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:46:36,065 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:36] "POST /clear-history HTTP/1.1" 200 -
+2025-06-09 14:46:36,075 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:36] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:46:36,077 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:36] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:46:40,550 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:46:40,550 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:46:40,550 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:40] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:46:50,194 - INFO - Processing number: 2454
+2025-06-09 14:46:50,195 - INFO - Excel data rows: 4607
+2025-06-09 14:46:50,195 - INFO - Search patterns: {'2454'}
+2025-06-09 14:46:50,197 - INFO - Found matches: 1
+2025-06-09 14:46:50,198 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:50] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:46:50,204 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:50] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:46:54,554 - INFO - Processing number: 2454
+2025-06-09 14:46:54,554 - INFO - Excel data rows: 4607
+2025-06-09 14:46:54,554 - INFO - Search patterns: {'2454'}
+2025-06-09 14:46:54,556 - INFO - Found matches: 1
+2025-06-09 14:46:54,557 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:54] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:46:54,562 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:54] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:46:57,186 - INFO - 127.0.0.1 - - [09/Jun/2025 14:46:57] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:47:25,946 - INFO - Processing number: so939
+2025-06-09 14:47:25,947 - INFO - Excel data rows: 4607
+2025-06-09 14:47:25,947 - INFO - Search patterns: {'so939', '939'}
+2025-06-09 14:47:25,949 - INFO - Found matches: 0
+2025-06-09 14:47:25,949 - INFO - 127.0.0.1 - - [09/Jun/2025 14:47:25] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:47:25,954 - INFO - 127.0.0.1 - - [09/Jun/2025 14:47:25] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:47:31,299 - INFO - Processing number: s0939
+2025-06-09 14:47:31,300 - INFO - Excel data rows: 4607
+2025-06-09 14:47:31,300 - INFO - Search patterns: {'s0939', '0939'}
+2025-06-09 14:47:31,303 - INFO - Found matches: 1
+2025-06-09 14:47:31,304 - INFO - 127.0.0.1 - - [09/Jun/2025 14:47:31] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:47:31,308 - INFO - 127.0.0.1 - - [09/Jun/2025 14:47:31] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:47:41,629 - INFO - 127.0.0.1 - - [09/Jun/2025 14:47:41] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:50:12,817 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:50:12,818 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:50:12,819 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:50:13,149 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:50:13,526 - WARNING -  * Debugger is active!
+2025-06-09 14:50:13,528 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:50:49,931 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:50:49,931 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:50:49,932 - INFO -  * Detected change in 'c:\\Users\\Maverick\\Documents\\numcheck\\app.py', reloading
+2025-06-09 14:50:50,644 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:50:51,028 - WARNING -  * Debugger is active!
+2025-06-09 14:50:51,031 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:50:54,880 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.103:5000
+2025-06-09 14:50:54,880 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 14:50:54,884 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:50:55,267 - WARNING -  * Debugger is active!
+2025-06-09 14:50:55,270 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:50:56,311 - INFO - 127.0.0.1 - - [09/Jun/2025 14:50:56] "GET / HTTP/1.1" 200 -
+2025-06-09 14:50:56,331 - INFO - 127.0.0.1 - - [09/Jun/2025 14:50:56] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:50:56,360 - INFO - 127.0.0.1 - - [09/Jun/2025 14:50:56] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:50:58,897 - INFO - 127.0.0.1 - - [09/Jun/2025 14:50:58] "POST /clear-history HTTP/1.1" 200 -
+2025-06-09 14:50:58,905 - INFO - 127.0.0.1 - - [09/Jun/2025 14:50:58] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:50:58,906 - INFO - 127.0.0.1 - - [09/Jun/2025 14:50:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 14:51:02,161 - INFO - Session excel_data_path set to: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:51:02,162 - INFO - Excel file uploaded and processed successfully. Path: uploads\SKDRDP_FINAL_SEARCH.pkl
+2025-06-09 14:51:02,162 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:02] "POST /upload-excel HTTP/1.1" 200 -
+2025-06-09 14:51:08,666 - INFO - Processing number: 2454
+2025-06-09 14:51:08,666 - INFO - Excel data rows: 4607
+2025-06-09 14:51:08,666 - INFO - Search patterns: {'2454'}
+2025-06-09 14:51:08,667 - INFO - Found matches: 1
+2025-06-09 14:51:08,668 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:08] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:51:08,673 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:08] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:51:11,675 - ERROR - Error exporting search history to Excel: No module named 'xlsxwriter'
+2025-06-09 14:51:11,675 - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "c:\Users\Maverick\Documents\numcheck\app.py", line 309, in export_search_history
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Maverick\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_xlsxwriter.py", line 197, in __init__
+    from xlsxwriter import Workbook
+ModuleNotFoundError: No module named 'xlsxwriter'
+2025-06-09 14:51:11,688 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\pandas\\io\\excel\\_xlsxwriter.py', reloading
+2025-06-09 14:51:11,689 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:11] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:51:12,375 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:51:12,762 - WARNING -  * Debugger is active!
+2025-06-09 14:51:12,764 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:51:38,510 - INFO - Processing number: s0940
+2025-06-09 14:51:38,511 - INFO - Excel data rows: 4607
+2025-06-09 14:51:38,511 - INFO - Search patterns: {'0940', 's0940'}
+2025-06-09 14:51:38,513 - INFO - Found matches: 1
+2025-06-09 14:51:38,514 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:38] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:51:38,522 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:38] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:51:50,338 - INFO - Processing number: s0940.
+2025-06-09 14:51:50,338 - INFO - Excel data rows: 4607
+2025-06-09 14:51:50,338 - INFO - Search patterns: {'0940', 's0940.', 's0940'}
+2025-06-09 14:51:50,341 - INFO - Found matches: 1
+2025-06-09 14:51:50,341 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:50] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:51:50,347 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:50] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:51:58,058 - INFO - Processing number: s0951
+2025-06-09 14:51:58,058 - INFO - Excel data rows: 4607
+2025-06-09 14:51:58,058 - INFO - Search patterns: {'s0951', '0951'}
+2025-06-09 14:51:58,060 - INFO - Found matches: 1
+2025-06-09 14:51:58,061 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:58] "POST /check-number HTTP/1.1" 200 -
+2025-06-09 14:51:58,066 - INFO - 127.0.0.1 - - [09/Jun/2025 14:51:58] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:52:01,115 - ERROR - Error exporting search history to Excel: No module named 'xlsxwriter'
+2025-06-09 14:52:01,116 - ERROR - Full traceback:
+Traceback (most recent call last):
+  File "c:\Users\Maverick\Documents\numcheck\app.py", line 309, in export_search_history
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Maverick\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\excel\_xlsxwriter.py", line 197, in __init__
+    from xlsxwriter import Workbook
+ModuleNotFoundError: No module named 'xlsxwriter'
+2025-06-09 14:52:01,118 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:01] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:52:40,399 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\__init__.py', reloading
+2025-06-09 14:52:40,399 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\__init__.py', reloading
+2025-06-09 14:52:40,399 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\app.py', reloading
+2025-06-09 14:52:40,400 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\app.py', reloading
+2025-06-09 14:52:40,400 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart.py', reloading
+2025-06-09 14:52:40,401 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart.py', reloading
+2025-06-09 14:52:40,402 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_area.py', reloading
+2025-06-09 14:52:40,402 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_area.py', reloading
+2025-06-09 14:52:40,402 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_bar.py', reloading
+2025-06-09 14:52:40,403 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_bar.py', reloading
+2025-06-09 14:52:40,403 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_column.py', reloading
+2025-06-09 14:52:40,404 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_column.py', reloading
+2025-06-09 14:52:40,404 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_doughnut.py', reloading
+2025-06-09 14:52:40,404 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_doughnut.py', reloading
+2025-06-09 14:52:40,405 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_line.py', reloading
+2025-06-09 14:52:40,405 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_line.py', reloading
+2025-06-09 14:52:40,406 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_pie.py', reloading
+2025-06-09 14:52:40,406 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_pie.py', reloading
+2025-06-09 14:52:40,406 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_radar.py', reloading
+2025-06-09 14:52:40,407 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_radar.py', reloading
+2025-06-09 14:52:40,407 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_scatter.py', reloading
+2025-06-09 14:52:40,407 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_scatter.py', reloading
+2025-06-09 14:52:40,408 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_stock.py', reloading
+2025-06-09 14:52:40,408 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chart_stock.py', reloading
+2025-06-09 14:52:40,409 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chartsheet.py', reloading
+2025-06-09 14:52:40,409 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\chartsheet.py', reloading
+2025-06-09 14:52:40,409 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\comments.py', reloading
+2025-06-09 14:52:40,410 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\comments.py', reloading
+2025-06-09 14:52:40,410 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\contenttypes.py', reloading
+2025-06-09 14:52:40,411 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\contenttypes.py', reloading
+2025-06-09 14:52:40,411 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\core.py', reloading
+2025-06-09 14:52:40,412 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\core.py', reloading
+2025-06-09 14:52:40,412 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\custom.py', reloading
+2025-06-09 14:52:40,412 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\custom.py', reloading
+2025-06-09 14:52:40,413 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\drawing.py', reloading
+2025-06-09 14:52:40,413 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\drawing.py', reloading
+2025-06-09 14:52:40,413 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\exceptions.py', reloading
+2025-06-09 14:52:40,414 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\exceptions.py', reloading
+2025-06-09 14:52:40,414 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\feature_property_bag.py', reloading
+2025-06-09 14:52:40,414 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\feature_property_bag.py', reloading
+2025-06-09 14:52:40,415 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\format.py', reloading
+2025-06-09 14:52:40,415 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\format.py', reloading
+2025-06-09 14:52:40,415 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\image.py', reloading
+2025-06-09 14:52:40,416 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\image.py', reloading
+2025-06-09 14:52:40,417 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\metadata.py', reloading
+2025-06-09 14:52:40,417 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\metadata.py', reloading
+2025-06-09 14:52:40,417 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\metadata.py', reloading
+2025-06-09 14:52:40,418 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\packager.py', reloading
+2025-06-09 14:52:40,418 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\packager.py', reloading
+2025-06-09 14:52:40,419 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\relationships.py', reloading
+2025-06-09 14:52:40,419 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\relationships.py', reloading
+2025-06-09 14:52:40,419 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value.py', reloading
+2025-06-09 14:52:40,420 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value.py', reloading
+2025-06-09 14:52:40,421 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value_rel.py', reloading
+2025-06-09 14:52:40,421 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value_rel.py', reloading
+2025-06-09 14:52:40,422 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value_structure.py', reloading
+2025-06-09 14:52:40,422 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value_structure.py', reloading
+2025-06-09 14:52:40,422 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value_types.py', reloading
+2025-06-09 14:52:40,423 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\rich_value_types.py', reloading
+2025-06-09 14:52:40,423 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\shape.py', reloading
+2025-06-09 14:52:40,423 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\shape.py', reloading
+2025-06-09 14:52:40,424 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\sharedstrings.py', reloading
+2025-06-09 14:52:40,424 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\sharedstrings.py', reloading
+2025-06-09 14:52:40,424 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\styles.py', reloading
+2025-06-09 14:52:40,425 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\styles.py', reloading
+2025-06-09 14:52:40,425 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\table.py', reloading
+2025-06-09 14:52:40,426 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\table.py', reloading
+2025-06-09 14:52:40,426 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\theme.py', reloading
+2025-06-09 14:52:40,426 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\theme.py', reloading
+2025-06-09 14:52:40,427 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\url.py', reloading
+2025-06-09 14:52:40,427 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\url.py', reloading
+2025-06-09 14:52:40,427 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\utility.py', reloading
+2025-06-09 14:52:40,428 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\utility.py', reloading
+2025-06-09 14:52:40,428 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\vml.py', reloading
+2025-06-09 14:52:40,428 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\vml.py', reloading
+2025-06-09 14:52:40,429 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\workbook.py', reloading
+2025-06-09 14:52:40,429 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\workbook.py', reloading
+2025-06-09 14:52:40,430 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\worksheet.py', reloading
+2025-06-09 14:52:40,431 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\worksheet.py', reloading
+2025-06-09 14:52:40,431 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\xmlwriter.py', reloading
+2025-06-09 14:52:40,432 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\xlsxwriter\\xmlwriter.py', reloading
+2025-06-09 14:52:40,436 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\vba_extract.py', reloading
+2025-06-09 14:52:40,436 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\vba_extract.py', reloading
+2025-06-09 14:52:40,438 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\vba_extract.py', reloading
+2025-06-09 14:52:40,439 - INFO -  * Detected change in 'C:\\Users\\Maverick\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\vba_extract.py', reloading
+2025-06-09 14:52:41,006 - INFO -  * Restarting with watchdog (windowsapi)
+2025-06-09 14:52:41,378 - WARNING -  * Debugger is active!
+2025-06-09 14:52:41,381 - INFO -  * Debugger PIN: 130-034-314
+2025-06-09 14:52:48,380 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:48] "GET / HTTP/1.1" 200 -
+2025-06-09 14:52:48,421 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:48] "GET /get-history HTTP/1.1" 200 -
+2025-06-09 14:52:48,444 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:48] "[35m[1mGET /static/correct.mp3 HTTP/1.1[0m" 206 -
+2025-06-09 14:52:50,760 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:50] "GET /export-search-history HTTP/1.1" 200 -
+2025-06-09 14:52:50,766 - INFO - 127.0.0.1 - - [09/Jun/2025 14:52:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -

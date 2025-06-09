@@ -281,27 +281,29 @@ def export_search_history():
         # Prepare data for DataFrame, flattening matches into separate rows
         flat_history_data = []
         for entry in history:
-            if entry['status'] == 'found':
-                for match in entry['matches']:
+            # Safely get matches, providing an empty list if 'matches' key is not present
+            entry_matches = entry.get('matches', [])
+            
+            if entry['status'] == 'found' and entry_matches:
+                for match in entry_matches:
                     row_data = {
                         'Search Number': entry['number'],
                         'Status': entry['status'],
-                        'Timestamp': entry['timestamp'],
-                        'Row Index': match['row_index']
                     }
                     # Add the columns from the matched row
                     for header, value in match['row'].items():
                         row_data[header] = value
                     flat_history_data.append(row_data)
             else:
+                # For 'not_found' or if no matches despite 'found' status, add basic info
                 flat_history_data.append({
                     'Search Number': entry['number'],
                     'Status': entry['status'],
-                    'Timestamp': entry['timestamp'],
-                    'Row Index': 'N/A' # No row index for not found items
                 })
         
-        df = pd.DataFrame(flat_history_data)
+        # Create DataFrame, ensuring consistent columns across all entries
+        # Fill missing values with empty string or a placeholder if needed
+        df = pd.DataFrame(flat_history_data).fillna('')
 
         output = io.BytesIO()
         with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
