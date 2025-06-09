@@ -87,7 +87,7 @@ def save_search_history(number, status, matches=None, timestamp=None):
 @app.route('/')
 def index():
     # This ensures search_history is initialized on every request if not present
-    init_search_history() 
+    init_search_history()
     return render_template('index.html')
 
 @app.route('/upload-excel', methods=['POST'])

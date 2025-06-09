@@ -685,115 +685,126 @@
 
             <!-- Number Checker Tab -->
             <div id="number-checker" class="tab-content active">
-                <div class="card">
-                    <h2 class="text-xl font-semibold mb-4">Step 1: Upload Excel File</h2>
-                    <form id="uploadForm" class="upload-form">
-                        <div class="mb-3">
-                            <label for="excelFile" class="block mb-2">Select Excel File</label>
-                            <input type="file" class="form-control" id="excelFile" accept=".xlsx,.xls" required>
-                        </div>
-                        <button type="submit" class="btn">
-                            <i class="fas fa-upload"></i>
-                            Upload Excel
-                        </button>
-                    </form>
-                    <div id="fileStats" class="mt-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg" style="display: none;">
-                        <h3 class="text-lg font-semibold mb-2">File Statistics</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-sm text-gray-300">Total Rows:</p>
-                                <p class="text-lg font-semibold" id="totalRows">-</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-300">Total Columns:</p>
-                                <p class="text-lg font-semibold" id="totalColumns">-</p>
-                            </div>
-                        </div>
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Step 1: Upload Excel File</h2>
+            <form id="uploadForm" class="upload-form">
+                <div class="mb-3">
+                    <label for="excelFile" class="block mb-2">Select Excel File</label>
+                    <input type="file" class="form-control" id="excelFile" accept=".xlsx,.xls" required>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-upload"></i>
+                    Upload Excel
+                </button>
+            </form>
+            <div id="fileStats" class="mt-4 p-4 bg-opacity-10 bg-purple-500 rounded-lg" style="display: none;">
+                <h3 class="text-lg font-semibold mb-2">File Statistics</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-300">Total Rows:</p>
+                        <p class="text-lg font-semibold" id="totalRows">-</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-300">Total Columns:</p>
+                        <p class="text-lg font-semibold" id="totalColumns">-</p>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="card">
-                    <h2 class="text-xl font-semibold mb-4">Step 2: Speak the Number</h2>
-                    <p class="mb-4">Click the button below and speak the number</p>
-                    <div class="recording-indicator" id="recordingIndicator">
-                        <i class="fas fa-microphone"></i> Recording...
-                    </div>
-                    <div class="detected-number" id="detectedNumber"></div>
-                    <div class="number-options" id="numberOptions" style="display: none;"></div>
-                    <div class="loading" id="loading">
-                        <div class="loading-spinner"></div>
-                        <p>Checking number...</p>
-                    </div>
-                    <div class="flex justify-center gap-4">
-                        <button id="startRecording" class="btn" disabled>
-                            <i class="fas fa-microphone"></i> Start Recording
-                        </button>
-                        <button id="stopRecording" class="btn btn-danger" style="display: none;">
-                            <i class="fas fa-stop"></i> Stop Recording
-                        </button>
-                        <button id="checkNumber" class="btn" style="display: none;">
-                            <i class="fas fa-search"></i> Check Number
-                        </button>
-                    </div>
-                </div>
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Step 2: Speak the Number</h2>
+            <p class="mb-4">Click the button below and speak the number</p>
+            <div class="recording-indicator" id="recordingIndicator">
+                <i class="fas fa-microphone"></i> Recording...
+            </div>
+            <div class="detected-number" id="detectedNumber"></div>
+            <div class="number-options" id="numberOptions" style="display: none;"></div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Checking number...</p>
+            </div>
+            <div class="flex justify-center gap-4">
+                <button id="startRecording" class="btn" disabled>
+                    <i class="fas fa-microphone"></i> Start Recording
+                </button>
+                <button id="stopRecording" class="btn btn-danger" style="display: none;">
+                    <i class="fas fa-stop"></i> Stop Recording
+                </button>
+                <button id="checkNumber" class="btn" style="display: none;">
+                    <i class="fas fa-search"></i> Check Number
+                </button>
+            </div>
+        </div>
 
-                <div id="statusContainer" class="status-container">
-                    <div id="status" class="status">
-                        <button class="close-status" onclick="hideStatus()">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <div class="status-icon"></div>
-                        <div class="status-message"></div>
-                        <div class="status-details"></div>
-                    </div>
-                </div>
-                
-                <div id="matchesContainer" class="matches-container" style="display: none;">
-                    <h3 class="text-lg font-semibold mb-3">Found Matches</h3>
-                    <div id="matchesList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-                </div>
+        <!-- Text Input Section -->
+        <div class="card mt-4">
+            <h2 class="text-xl font-semibold mb-4">Or Type the Number</h2>
+            <div class="flex flex-col items-center gap-4">
+                <input type="text" id="numberInput" class="w-full max-w-md px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-purple-500" placeholder="Enter number (e.g., A1234, a1234, or 1234)">
+                <button id="checkTypedNumber" class="btn">
+                    <i class="fas fa-search"></i> Check Number
+                </button>
+            </div>
+        </div>
 
-                <div class="card">
+        <div id="statusContainer" class="status-container">
+            <div id="status" class="status">
+                <button class="close-status" onclick="hideStatus()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="status-icon"></div>
+                <div class="status-message"></div>
+                <div class="status-details"></div>
+            </div>
+        </div>
+        
+        <div id="matchesContainer" class="matches-container" style="display: none;">
+            <h3 class="text-lg font-semibold mb-3">Found Matches</h3>
+            <div id="matchesList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div class="card">
                     <h2 class="text-xl font-semibold mb-4">Search History</h2>
                     <div class="mb-4">
                         <button id="clearHistory" class="btn btn-secondary mr-2">
-                            <i class="fas fa-trash"></i> Clear History
-                        </button>
+                    <i class="fas fa-trash"></i> Clear History
+                </button>
                         <button id="saveHistory" class="btn btn-primary">
                             <i class="fas fa-file-excel"></i> Save History
                         </button>
-                    </div>
+            </div>
                     <div class="grid grid-cols-2 gap-4 mb-4">
-                        <div>
+                    <div>
                             <p class="text-gray-400">Total Searches:</p>
                             <p id="totalSearches" class="text-xl font-bold">0</p>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                             <p class="text-gray-400">Success Rate:</p>
                             <p id="successRate" class="text-xl font-bold">0%</p>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                             <p class="text-gray-400">Found:</p>
                             <p id="foundCount" class="text-xl font-bold text-green-500">0</p>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                             <p class="text-gray-400">Not Found:</p>
                             <p id="notFoundCount" class="text-xl font-bold text-yellow-500">0</p>
-                        </div>
                     </div>
+                </div>
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-gray-800 rounded-lg">
-                            <thead>
-                                <tr>
+                    <thead>
+                        <tr>
                                     <th class="py-2 px-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Number</th>
                                     <th class="py-2 px-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Status</th>
                                     <th class="py-2 px-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Time</th>
-                                </tr>
-                            </thead>
+                        </tr>
+                    </thead>
                             <tbody id="historyList">
                                 <!-- History items will be loaded here by JavaScript -->
                             </tbody>
-                        </table>
+                </table>
                     </div>
                 </div>
             </div>
@@ -1689,6 +1700,36 @@
                 // Generate Excel file with natural timestamp
                 XLSX.writeFile(wb, `cabinet_data_${day}th_${month}_${year}_${time}.xlsx`);
             });
+        });
+
+        // Text Input Functionality
+        document.getElementById('checkTypedNumber').addEventListener('click', function() {
+            const inputValue = document.getElementById('numberInput').value.trim();
+            if (inputValue) {
+                currentNumber = inputValue; // Set the current number
+                document.getElementById('detectedNumber').textContent = `Input: ${inputValue.toUpperCase()}`;
+                document.getElementById('detectedNumber').style.display = 'block';
+                checkNumber(inputValue); // Directly check the number
+            } else {
+                showStatus('Please enter a number', 'error');
+            }
+        });
+
+        // Add enter key support for the input field
+        document.getElementById('numberInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('checkTypedNumber').click();
+            }
+        });
+
+        // Add input event to show alternatives as user types
+        document.getElementById('numberInput').addEventListener('input', function(e) {
+            const inputValue = e.target.value.trim();
+            if (inputValue) {
+                displayNumberOptions(inputValue);
+            } else {
+                document.getElementById('numberOptions').style.display = 'none';
+            }
         });
     </script>
     <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
